@@ -2,7 +2,6 @@
   <div class="bg-black text-gray-200">
     <section class="relative py-32 bg-gradient-to-br from-black via-gray-900 to-gray-800">
       <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <!-- Left section (text) -->
         <div
           class="text-center md:text-left transform -translate-x-full opacity-0 transition-all duration-1000 ease-out animate-slideIn">
           <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-gray-100">
@@ -14,7 +13,6 @@
             custom website let’s connect and discuss how we can make it happen.
           </p>
 
-          <!-- Social Media Icons -->
           <div class="flex justify-center md:justify-start space-x-6">
             <div v-for="social in socialMediaLinks" :key="social.name">
               <a :href="social.url" target="_blank" class="text-gray-400 hover:text-white transition-all duration-300">
@@ -25,7 +23,6 @@
         </div>
 
 
-        <!-- Right section (image) -->
         <div
           class="flex justify-center transform translate-x-full opacity-0 transition-all duration-1000 ease-out animate-slideInRight"
           style="animation-delay: 0.5s;">
@@ -63,32 +60,47 @@
         </div>
       </div>
     </section>
-    <section class="py-20 bg-gray-900">
-      <div class="max-w-6xl mx-auto px-8">
-        <h2 class="text-4xl font-bold text-center text-gray-100 mb-12">Experience</h2>
-        <div class="grid md:grid-cols-2 gap-8 mb-16 items-center">
-          <div>
-            <h3 class="text-2xl font-semibold text-gray-100 mb-4">January 2025 - Present</h3>
-          </div>
-          <div class="max-w-3xl mx-auto">
-            <p class="text-2xl font-bold text-white mb-4 whitespace-nowrap">Front-end Web Developer (Internship) - Awork
-              Company Denmark</p>
-            <p class="text-xl text-gray-300 mb-4">Contributed to the development of CitizenOne Website using NuxtJS,
-              Laravel, and Typescript. Collaborated with senior developers to implement new
-              features, troubleshoot bugs, and optimize web performance</p>
-            <p class="text-xl text-gray-300 mb-4"><span class="text-white bg-teal-600 p-1 rounded-sm">Laravel</span>
-              <span class="text-white bg-teal-600 p-1 rounded-sm">Nuxt.js</span> <span
-                class="text-white bg-teal-600 p-1 rounded-sm">MySQL</span></p>
-          </div>
+    <section class="py-16 bg-gradient-to-br from-black via-gray-900 to-gray-800 text-gray-100">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center text-gray-100 mb-12">Experience</h2>
 
+        <div class="space-y-12">
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <!-- Left Column (Date) -->
+            <div class="text-center md:text-left">
+              <h3 class="text-xl sm:text-2xl font-semibold text-gray-100 mb-2">January 2025 - Present</h3>
+            </div>
+
+            <!-- Right Column (Experience Details) -->
+            <div class="text-center md:text-left max-w-3xl mx-auto">
+              <p class="text-xl sm:text-2xl font-bold text-white mb-4">Front-end Web Developer (Internship) - Awork
+                Company, Denmark</p>
+              <p class="text-base sm:text-lg text-gray-300 mb-4">
+                Contributed to the development of CitizenOne Website using NuxtJS, Laravel, and Typescript. Collaborated
+                with senior developers to implement new features, troubleshoot bugs, and optimize web performance.
+              </p>
+              <p class="text-sm sm:text-base text-gray-300 flex flex-wrap gap-4 justify-center">
+                <span class="bg-gray-700 text-white py-1 px-2 rounded-md flex items-center gap-2">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" alt="Laravel"
+                    class="h-5 w-5" />
+                  Laravel
+                </span>
+                <span class="bg-gray-700 text-white py-1 px-2 rounded-md flex items-center gap-2">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Nuxt_logo.svg" alt="Nuxt.js"
+                    class="h-5 w-5" />
+                  Nuxt.js
+                </span>
+                <span class="bg-gray-700 text-white py-1 px-2 rounded-md flex items-center gap-2">
+                  <img src="https://bgasparotto.com/wp-content/uploads/2015/05/mysql-logo.png" alt="MySQL"
+                    class="h-5 w-5" />
+                  MySQL
+                </span>
+              </p>
+            </div>
+          </div>
         </div>
-
-
       </div>
     </section>
-
-
-
     <Footer />
   </div>
 </template>
@@ -162,6 +174,6 @@ const projects = [
 
 .animate-slideInRight {
   animation: slideInRight 1s ease-out forwards;
-  animation-delay: 1s;
+
 }
 </style>
