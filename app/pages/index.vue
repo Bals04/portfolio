@@ -9,7 +9,8 @@
             Hi, I'm <span class="text-gray-400">Jonhyl</span>
           </h1>
           <p class="text-lg md:text-xl text-gray-400 mb-10">
-            I specialize in building websites that are both aesthetically pleasing and functionally perfect. Elevate your business with a
+            I specialize in building websites that are both aesthetically pleasing and functionally perfect. Elevate
+            your business with a
             custom website let’s connect and discuss how we can make it happen.
           </p>
 
@@ -37,12 +38,13 @@
         <h2 class="text-4xl font-bold text-center text-gray-100 mb-12">Technologies</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
           <div v-for="tech in techStack" :key="tech.name"
-            class="flex flex-col items-center space-y-4 transition-transform duration-300 ease-in-out hover:scale-110">
+            class="flex flex-col items-center space-y-4 transition-transform duration-300 ease-in-out hover:scale-110 bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl">
             <img :src="tech.logo" :alt="tech.name" class="w-16 h-16 object-contain" />
-            <p class="text-lg font-semibold">{{ tech.name }}</p>
+            <p class="text-lg font-semibold text-gray-100">{{ tech.name }}</p>
           </div>
         </div>
       </div>
+
     </section>
     <section class="py-20 bg-gray-900">
       <div class="max-w-6xl mx-auto px-8">
@@ -59,6 +61,29 @@
             <img :src="project.image" :alt="project.title" class="rounded-lg shadow-lg object-cover w-full h-full">
           </div>
         </div>
+      </div>
+    </section>
+    <section class="py-20 bg-gray-900">
+      <div class="max-w-6xl mx-auto px-8">
+        <h2 class="text-4xl font-bold text-center text-gray-100 mb-12">Experience</h2>
+        <div class="grid md:grid-cols-2 gap-8 mb-16 items-center">
+          <div>
+            <h3 class="text-2xl font-semibold text-gray-100 mb-4">January 2025 - Present</h3>
+          </div>
+          <div class="max-w-3xl mx-auto">
+            <p class="text-2xl font-bold text-white mb-4 whitespace-nowrap">Front-end Web Developer (Internship) - Awork
+              Company Denmark</p>
+            <p class="text-xl text-gray-300 mb-4">Contributed to the development of CitizenOne Website using NuxtJS,
+              Laravel, and Typescript. Collaborated with senior developers to implement new
+              features, troubleshoot bugs, and optimize web performance</p>
+            <p class="text-xl text-gray-300 mb-4"><span class="text-white bg-teal-600 p-1 rounded-sm">Laravel</span>
+              <span class="text-white bg-teal-600 p-1 rounded-sm">Nuxt.js</span> <span
+                class="text-white bg-teal-600 p-1 rounded-sm">MySQL</span></p>
+          </div>
+
+        </div>
+
+
       </div>
     </section>
 
