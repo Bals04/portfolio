@@ -1,32 +1,36 @@
 <template>
   <div class="bg-black text-gray-200">
-    <section class="relative py-32 bg-gradient-to-br from-black via-gray-900 to-gray-800">
-      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div
-          class="text-center md:text-left transform -translate-x-full opacity-0 transition-all duration-1000 ease-out animate-slideIn">
-          <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-gray-100">
-            Hi, I'm <span class="text-gray-400">Jonhyl</span>
-          </h1>
-          <p class="text-lg md:text-xl text-gray-400 mb-10">
-            I specialize in building websites that are both aesthetically pleasing and functionally perfect. Elevate
-            your business with a
-            custom website let’s connect and discuss how we can make it happen.
-          </p>
-
-          <div class="flex justify-center md:justify-start space-x-6">
-            <div v-for="social in socialMediaLinks" :key="social.name">
-              <a :href="social.url" target="_blank" class="text-gray-400 hover:text-white transition-all duration-300">
-                <img :src="social.logo" alt="social.name" class="w-8 h-8 object-contain" />
+    <section class="relative bg-gradient-to-br from-black via-gray-900 to-gray-800">
+      <div class="flex lg:flex-row flex-col gap-4 bg-surface-0 dark:bg-surface-900">
+        <div class="flex-1 flex items-center justify-center">
+          <div class="p-6 pt-12 lg:p-12">
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6 text-gray-100">
+              Hi, I'm <span class="text-gray-400">Jonhyl</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 mb-10"> A web developer that creates visually stunning
+              websites that deliver seamless functionality. Whether you're looking to revamp your online presence or
+              build something new, let's collaborate to bring your vision to life and drive your business forward. </p>
+            <div class="flex justify-center md:justify-start space-x-6">
+              <div v-for="social in socialMediaLinks" :key="social.name">
+                <a :href="social.url" target="_blank"
+                  class="text-gray-400 hover:text-white transition-all duration-300">
+                  <img :src="social.logo" alt="social.name" class="w-8 h-8 object-contain" />
+                </a>
+              </div>
+              <a href="/projects"
+                class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-all duration-300 hidden">
+                My Projects
+              </a>
+              <a href="/testComponent"
+                class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-all duration-300 hidden">
+                TEST
               </a>
             </div>
           </div>
         </div>
-
-
-        <div
-          class="flex justify-center transform translate-x-full opacity-0 transition-all duration-1000 ease-out animate-slideInRight"
-          style="animation-delay: 0.5s;">
-          <img src="/hero-image.png" alt="Hero Image" class="rounded-lg" />
+        <div class="flex-1 overflow-hidden">
+          <img src="/hero2.jpeg" alt="hero-1"
+            class="h-full w-full object-cover lg:[clip-path:polygon(12%_0,100%_0%,100%_100%,0_100%)]" />
         </div>
       </div>
     </section>
@@ -109,8 +113,7 @@
 
 const socialMediaLinks = [
   { name: 'GitHub', url: 'https://github.com/bals04', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Github_logo_svg.svg/640px-Github_logo_svg.svg.png' },
-  { name: 'Facebook', url: 'https://facebook.com/jj.balsamo', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg' },
-  { name: 'Instagram', url: 'https://instagram.com/yourusername', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg' }
+  { name: 'Facebook', url: 'https://facebook.com/jj.balsamo', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg' }
 ];
 
 
