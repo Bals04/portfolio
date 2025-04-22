@@ -21,10 +21,6 @@
                 class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-all duration-300 hidden">
                 My Projects
               </a>
-              <a href="/testComponent"
-                class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-primary-dark transition-all duration-300 hidden">
-                TEST
-              </a>
             </div>
           </div>
         </div>
