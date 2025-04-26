@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-gray-900 text-gray-400 py-6 text-center">
+  <footer class="bg-[#1c1c1c] text-gray-200 py-6 text-center">
     <p>© 2025 Jonhyl Balsamo. All rights reserved.</p>
     <div class="flex justify-center space-x-4 mt-4">
       <ul class="flex space-x-6">
