@@ -19,7 +19,7 @@
             <div class="flex flex-wrap gap-4">
               <div class="mt-16 text-center">
                 <a href="https://facebook.com/jj.balsamo"
-                  class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#1c1c1c] to-gray-600 text-white font-medium rounded-lg">
+                  class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#1c1c1c] to-gray-600 text-white font-medium rounded-sm">
                   <span>Let's work together</span>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 ml-2">
                     <path fill-rule="evenodd"
@@ -35,12 +35,12 @@
           <div class="lg:w-2/5 mt-12 lg:mt-0 relative">
             <div class="relative z-10">
               <div
-                class="absolute -top-5 -left-5 w-full h-full bg-gradient-to-r from-[#1c1c1c] to-gray-400 rounded-3xl opacity-60">
+                class="absolute -top-5 -left-5 w-full h-full bg-gradient-to-r from-[#1c1c1c] to-gray-400 opacity-60">
               </div>
               <div
-                class="absolute -bottom-5 -right-5 w-full h-full bg-gradient-to-l from-[#1c1c1c] to-gray-200 rounded-3xl opacity-40">
+                class="absolute -bottom-5 -right-5 w-full h-full bg-gradient-to-l from-[#1c1c1c] to-gray-200 opacity-40">
               </div>
-              <div class="relative z-20 overflow-hidden rounded-3xl shadow-2xl border-4 border-white">
+              <div class="relative z-20 overflow-hidden shadow-2xl">
                 <img src="/hero2.jpeg" alt="Jonhyl Balsamo" class="w-full h-full object-cover" />
               </div>
             </div>
