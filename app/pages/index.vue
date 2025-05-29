@@ -186,11 +186,13 @@
             </div>
             <!-- Right Column (Experience Details) -->
             <div class="text-center md:text-left max-w-3xl mx-auto">
-              <p class="text-xl sm:text-2xl font-bold text-[#1c1c1c] mb-4">Front-end Web Developer (Internship) - Awork
-                Company, Denmark</p>
+              <p class="text-xl sm:text-2xl font-bold text-[#1c1c1c] mb-4">
+                Front-End Web Developer Intern — Awork Company, Denmark
+              </p>
               <p class="text-base sm:text-lg text-gray-700 mb-4">
-                Contributed to the development of CitizenOne Website using NuxtJS, Laravel, and Typescript. Collaborated
-                with senior developers to implement new features, troubleshoot bugs, and optimize web performance.
+                Assisted in building and enhancing the CitizenOne website using NuxtJS, Laravel, and TypeScript.
+                Collaborated closely with senior developers to implement new features, resolve bugs, and optimize
+                overall web performance and user experience.
               </p>
               <p class="text-sm sm:text-base text-gray-700 flex flex-wrap gap-4 justify-center">
                 <span
