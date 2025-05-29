@@ -18,7 +18,7 @@
               businesses the online presence they need to succeed.</p>
             <div class="flex flex-wrap gap-4">
               <div class="mt-16 text-center">
-                <!-- <a href="https://facebook.com/jj.balsamo"
+                <a href="https://facebook.com/jj.balsamo"
                   class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#1c1c1c] to-gray-600 text-white font-medium rounded-sm">
                   <span>Let's work together</span>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 ml-2">
@@ -26,17 +26,7 @@
                       d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
                       clip-rule="evenodd" />
                   </svg>
-                </a> -->
-                <button @click="handleClick"
-                  class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#1c1c1c] to-gray-600 text-white font-medium rounded-sm">
-                  <span>Let's work together</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 ml-2">
-                    <path fill-rule="evenodd"
-                      d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                      clip-rule="evenodd" />
-                  </svg>
-                </button>
-
+                </a>
                 <div class="flex items-center mt-16 justify-center lg:justify-start gap-6">
                   <span class="text-sm text-gray-500 font-medium">Socials:</span>
                   <a href="https://github.com/bals04" class="text-[#1c1c1c] hover:text-gray-600 transition-colors">
