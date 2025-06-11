@@ -233,13 +233,20 @@ const techStack = [
 const projects = [
   {
     id: 1,
+    title: 'E-Voting System',
+    description: 'An E-Voting System is a digital platform that allows voters to cast their votes electronically instead of using traditional paper ballots. It ensures a secure, transparent, and efficient voting process.',
+    technology: 'Reactjs, TypeScript, Tailwind CSS, Node.js, Express, MySQL, Supabase',
+    image: '/evotingimg.png'
+  },
+  {
+    id: 2,
     title: 'Flexperience',
     description: 'A web-based solution bringing gym owners, trainers, and fitness enthusiasts together in a unified fitness management platform.',
     technology: 'HTML, CSS, Tailwind CSS, Node.js, Express, MySQL, Socket.io, Supabase',
     image: '/flexperience.png'
   },
   {
-    id: 2,
+    id: 3,
     title: 'Eagle Mountain College Enrollment System',
     description: 'An enrollment system allows users to easily register, track, and manage their participation in programs, courses, or events. It streamlines the process for both administrators and participants, offering a seamless experience for signing up, scheduling, and confirming attendance. Perfect for schools, gyms, or any organization that offers structured programs.',
     technology: 'C#, MySQL',
