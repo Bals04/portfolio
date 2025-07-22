@@ -22,10 +22,11 @@
                 From concept to launch, I create websites that give businesses the online presence they need to succeed.
               </p>
             </div>
-            <div class="flex flex-wrap gap-4">
+            <div ref="textContainer" :class="textVisible ? 'animate-slideIn opacity-100' : 'opacity-0'"
+              class="flex flex-wrap gap-4">
               <div class="mt-16 text-center">
                 <a href="https://facebook.com/jj.balsamo"
-                  class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#1c1c1c] to-gray-600 text-white font-medium rounded-sm">
+                  class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#1c1c1c] to-gray-600 text-white font-medium rounded-md">
                   <span>Let's work together</span>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 ml-2">
                     <path fill-rule="evenodd"
@@ -56,7 +57,8 @@
           </div>
 
           <!-- Right column with image and decorative elements -->
-          <div class="lg:w-2/5 mt-12 lg:mt-0 relative">
+          <div ref="textContainer" :class="textVisible ? 'animate-slideInRight opacity-100' : 'opacity-0'"
+            class="lg:w-2/5 mt-12 lg:mt-0 relative">
             <div class="relative z-10">
               <div class="absolute -top-5 -left-5 w-full h-full bg-gradient-to-r from-[#1c1c1c] to-gray-400 opacity-60">
               </div>
@@ -105,37 +107,6 @@
         </div>
       </div>
     </section>
-
-    <!-- Tech Stack Section with Animation -->
-    <section ref="techSection" class="py-20 bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-800">
-      <div class="max-w-6xl mx-auto px-8">
-        <div class="mb-16 text-center" :class="techVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'"
-          style="transition: all 1s ease-out;">
-          <span
-            class="inline-block px-3 py-1 bg-[#1c1c1c] bg-opacity-10 text-[#1c1c1c] text-sm font-medium rounded-full mb-3">My
-            Toolkit</span>
-          <h2 class="text-4xl font-bold text-[#1c1c1c] mb-4">Technologies I Work With</h2>
-          <div class="w-24 h-1 bg-[#1c1c1c] mx-auto"></div>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-          <div v-for="(tech, index) in techStack" :key="tech.name"
-            :class="techVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'"
-            :style="`transition: all 1s ease-out; transition-delay: ${index * 0.1}s;`"
-            class="group relative flex flex-col items-center bg-white p-6 rounded-xl shadow-md hover:shadow-xl border border-gray-100 transition-all duration-300 hover:-translate-y-2">
-            <div
-              class="absolute inset-0 bg-[#1c1c1c] opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300">
-            </div>
-            <div class="w-16 h-16 mb-4 flex items-center justify-center">
-              <img :src="tech.logo" :alt="tech.name" class="max-w-full max-h-full object-contain" />
-            </div>
-            <p class="text-lg font-semibold text-[#1c1c1c] text-center">{{ tech.name }}</p>
-            <div class="mt-2 h-1 w-0 group-hover:w-16 bg-[#1c1c1c] transition-all duration-300"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Projects Section with Animation -->
     <section ref="projectsSection" class="py-20 bg-gray-100">
       <div class="max-w-6xl mx-auto px-8">
@@ -215,6 +186,36 @@
       </div>
     </section>
 
+    <!-- Tech Stack Section with Animation -->
+    <section ref="techSection" class="py-20 bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-800">
+      <div class="max-w-6xl mx-auto px-8">
+        <div class="mb-16 text-center" :class="techVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'"
+          style="transition: all 1s ease-out;">
+          <span
+            class="inline-block px-3 py-1 bg-[#1c1c1c] bg-opacity-10 text-[#1c1c1c] text-sm font-medium rounded-full mb-3">My
+            Toolkit</span>
+          <h2 class="text-4xl font-bold text-[#1c1c1c] mb-4">Technologies</h2>
+          <div class="w-24 h-1 bg-[#1c1c1c] mx-auto"></div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+          <div v-for="(tech, index) in techStack" :key="tech.name"
+            :class="techVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'"
+            :style="`transition: all 1s ease-out; transition-delay: ${index * 0.1}s;`"
+            class="group relative flex flex-col items-center bg-white p-6 rounded-xl shadow-md hover:shadow-xl border border-gray-100 transition-all duration-300 hover:-translate-y-2">
+            <div
+              class="absolute inset-0 bg-[#1c1c1c] opacity-0 group-hover:opacity-5 rounded-xl transition-opacity duration-300">
+            </div>
+            <div class="w-16 h-16 mb-4 flex items-center justify-center">
+              <img :src="tech.logo" :alt="tech.name" class="max-w-full max-h-full object-contain" />
+            </div>
+            <p class="text-lg font-semibold text-[#1c1c1c] text-center">{{ tech.name }}</p>
+            <div class="mt-2 h-1 w-0 group-hover:w-16 bg-[#1c1c1c] transition-all duration-300"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <Footer />
   </div>
 </template>
@@ -264,7 +265,7 @@ const projects = [
 
 const experiences = [
   {
-    id: 1 ,
+    id: 1,
     date: 'June 2025 - Present',
     title: 'Front-End Web Developer — Awork Company, Denmark',
     description:
