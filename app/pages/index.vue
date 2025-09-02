@@ -7,8 +7,7 @@
         <div class="flex flex-col lg:flex-row items-center justify-center w-full">
           <!-- Left column with text and button -->
           <div class="lg:w-3/5 lg:pr-12 z-10">
-            <div ref="textContainer" :class="textVisible ? 'animate-slideIn opacity-100' : 'opacity-0'"
-              class="transition-opacity duration-1000">
+            <div ref="textContainer" class="animate-slideIn opacity-100 transition-opacity duration-1000">
               <div class="mb-8">
                 <span class="inline-block px-4 py-1 bg-[#1c1c1c] text-white text-md font-medium rounded-full mb-4">Web
                   Developer</span>
@@ -107,44 +106,80 @@
         </div>
       </div>
     </section>
-    <!-- Projects Section with Animation -->
-    <section ref="projectsSection" class="py-20 bg-gray-100">
-      <div class="max-w-6xl mx-auto px-8">
-        <div class="mb-16 text-center"
-          :class="projectsVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'"
-          style="transition: all 1s ease-out;">
-          <span
-            class="inline-block px-3 py-1 bg-[#1c1c1c] bg-opacity-10 text-[#1c1c1c] text-sm font-medium rounded-full mb-3">Portfolio</span>
-          <h2 class="text-4xl font-bold text-[#1c1c1c] mb-4">Featured Projects</h2>
-          <div class="w-24 h-1 bg-[#1c1c1c] mx-auto"></div>
+    <!-- Minimal Projects Section -->
+
+    <!-- Elegant Minimal Projects Section -->
+    <section ref="projectsSection" class="py-32 bg-gray-50">
+      <div class="max-w-5xl mx-auto px-6">
+        <!-- Elegant Header -->
+        <div class="mb-24 text-center" :class="projectsVisible ? 'opacity-100' : 'opacity-0'"
+          :style="projectsVisible ? 'transform: translateY(0); transition: all 0.8s ease-out;' : 'transform: translateY(20px); transition: all 0.8s ease-out;'">
+
+          <h1 class="text-3xl font-medium text-slate-800 mb-8 tracking-tight">
+            Projects
+          </h1>
+
+          <div class="w-8 h-px bg-gray-500 mx-auto"></div>
         </div>
 
-        <div v-for="(project, index) in projects" :key="project.id"
-          :class="projectsVisible ? 'animate-slideInStagger opacity-100' : 'opacity-0 translate-x-12'"
-          :style="`transition: all 1s ease-out; transition-delay: ${index * 0.3}s;`"
-          class="flex flex-col md:flex-row gap-8 mb-24 bg-white rounded-xl overflow-hidden shadow-xl">
-          <!-- Image Section -->
-          <div class="md:w-1/2" :class="index % 2 === 0 ? 'md:order-1' : 'md:order-2'">
-            <div class="relative h-full">
-              <img :src="project.image" :alt="project.title" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-[#1c1c1c] opacity-0 hover:opacity-20 transition-opacity duration-300">
+        <!-- Elegant Project Grid -->
+        <div class="space-y-24">
+          <div v-for="(project, index) in projects" :key="project.id"
+            :class="projectsVisible ? 'opacity-100' : 'opacity-0'" :style="projectsVisible ?
+              `transform: translateY(0); transition: all 0.8s ease-out; transition-delay: ${index * 0.15}s;` :
+              `transform: translateY(30px); transition: all 0.8s ease-out; transition-delay: ${index * 0.15}s;`"
+            class="group cursor-pointer">
+
+            <!-- Project Number & Title -->
+            <div class="flex items-baseline justify-between mb-6 pb-4" style="border-bottom: 1px solid #e2e8f0;">
+              <div class="flex items-baseline gap-8">
+                <span
+                  class="text-xs font-medium text-white bg-slate-800 rounded-full p-1 tracking-[0.2em] grid place-items-center"
+                  style="min-width: 40px;">
+                  {{ String(index + 1).padStart(2, '0') }}
+                </span>
+
+                <h3 class="text-xl font-medium text-slate-600 tracking-tight">
+                  {{ project.title }}
+                </h3>
               </div>
             </div>
-          </div>
 
-          <!-- Content Section -->
-          <div class="md:w-1/2 p-8 lg:p-10 flex flex-col justify-center"
-            :class="index % 2 === 0 ? 'md:order-2' : 'md:order-1'">
-            <h3 class="text-2xl lg:text-3xl font-bold text-[#1c1c1c] mb-4">{{ project.title }}</h3>
-            <p class="text-gray-700 mb-6">{{ project.description }}</p>
+            <!-- Project Image -->
+            <div class="relative mb-8 overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
+              <img :src="project.image" :alt="project.title"
+                class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105">
 
-            <div class="mb-6">
-              <p class="text-sm font-medium text-[#1c1c1c] mb-3">Technologies:</p>
-              <div class="flex flex-wrap gap-2">
-                <span v-for="tech in project.technology.split(', ')" :key="tech"
-                  class="inline-block px-3 py-1 bg-[#1c1c1c] text-gray-200 text-xs font-medium rounded-md">
-                  {{ tech }}
+
+              <!-- Floating Badge -->
+              <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span
+                  class="inline-flex items-center px-3 py-1 bg-white/90 backdrop-blur-sm text-slate-700 text-xs font-medium rounded-full shadow-sm">
+                  View Project
                 </span>
+              </div>
+            </div>
+
+            <!-- Project Info -->
+            <div class="grid md:grid-cols-3 gap-8">
+              <!-- Description -->
+              <div class="md:col-span-2">
+                <p class="text-lg leading-relaxed text-slate-600 font-medium">
+                  {{ project.description }}
+                </p>
+              </div>
+
+              <!-- Tech Stack -->
+              <div class="md:col-span-1">
+                <div class="mb-3">
+                  <span class="text-xs font-medium text-gray-600 tracking-[0.1em] uppercase">Technology</span>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  <span v-for="tech in project.technology.split(', ')" :key="tech"
+                    class="inline-block px-3 py-1 bg-gray-600 text-white text-xs font-medium rounded-full">
+                    {{ tech }}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -155,31 +190,59 @@
     <!-- Experience Section with Animation -->
     <section class="py-16 bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-800">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 ref="experienceTitle" class="text-3xl sm:text-4xl font-bold text-center text-[#1c1c1c] mb-12"
+        <h2 ref="experienceTitle" class="text-3xl sm:text-4xl font-bold text-center text-[#1c1c1c] mb-16"
           :class="experienceTitleVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'"
           style="transition: all 1s ease-out;">Experience</h2>
 
-        <div class="space-y-12">
-          <div v-for="(exp, index) in experiences" :key="exp.id" :ref="el => experienceItems[index] = el"
-            :class="experienceItemsVisible[index] ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'"
-            style="transition: all 1s ease-out;" class="grid md:grid-cols-2 gap-8 items-center">
-            <!-- Left Column -->
-            <div class="text-center md:text-left">
-              <h3 class="text-xl sm:text-2xl font-semibold text-[#1c1c1c] mb-2">
-                {{ exp.date }}
-              </h3>
-            </div>
-            <!-- Right Column -->
-            <div class="text-center md:text-left max-w-3xl mx-auto">
-              <p class="text-xl sm:text-2xl font-bold text-[#1c1c1c] mb-4">{{ exp.title }}</p>
-              <p class="text-base sm:text-lg text-gray-700 mb-4">{{ exp.description }}</p>
-              <p class="text-sm sm:text-base text-gray-700 flex flex-wrap gap-4 justify-center">
-                <span v-for="tech in exp.technologies" :key="tech.name"
-                  class="bg-white border border-gray-200 text-[#1c1c1c] py-1 px-2 rounded-md flex items-center gap-2 shadow-sm">
-                  <img :src="tech.icon" :alt="tech.name" class="h-5 w-5" />
-                  {{ tech.name }}
-                </span>
-              </p>
+        <div class="relative">
+          <!-- Timeline Line -->
+          <div
+            class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300 transform md:-translate-x-px">
+          </div>
+
+          <div class="space-y-12">
+            <div v-for="(exp, index) in experiences" :key="exp.id" :ref="el => experienceItems[index] = el" :class="[
+              experienceItemsVisible[index] ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8',
+              index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+            ]" style="transition: all 1s ease-out;" class="relative flex flex-col md:flex-row md:items-center">
+
+              <!-- Timeline Dot -->
+              <div
+                class="absolute left-4 md:left-1/2 w-4 h-4 bg-[#1c1c1c] rounded-full transform -translate-x-2 md:-translate-x-2 z-10 shadow-lg border-4 border-white">
+              </div>
+
+              <!-- Content Card -->
+              <div :class="index % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8 md:text-left'"
+                class="ml-12 md:ml-0 md:w-1/2 bg-white rounded-lg p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+
+                <!-- Date Badge -->
+                <div :class="index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'" class="flex justify-start mb-3">
+                  <span class="bg-[#1c1c1c] text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    {{ exp.date }}
+                  </span>
+                </div>
+
+                <!-- Title and Description -->
+                <h3 class="text-xl sm:text-2xl font-bold text-[#1c1c1c] mb-3">
+                  {{ exp.title }}
+                </h3>
+                <p class="text-base sm:text-lg text-gray-700 mb-4 leading-relaxed">
+                  {{ exp.description }}
+                </p>
+
+                <!-- Technologies -->
+                <div :class="index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'"
+                  class="flex flex-wrap gap-2 justify-start">
+                  <span v-for="tech in exp.technologies" :key="tech.name"
+                    class="bg-gray-50 border border-gray-200 text-[#1c1c1c] py-1 px-3 rounded-full text-sm flex items-center gap-2 hover:bg-gray-100 transition-colors">
+                    <img :src="tech.icon" :alt="tech.name" class="h-4 w-4" />
+                    {{ tech.name }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Spacer for alignment -->
+              <div class="hidden md:block md:w-1/2"></div>
             </div>
           </div>
         </div>
@@ -242,24 +305,31 @@ const techStack = [
 const projects = [
   {
     id: 1,
+    title: 'XNY Events & Food services',
+    description: 'A promotional landing page for an events and catering business in Davao.',
+    technology: 'HTML, Tailwind CSS',
+    image: '/xny.png'
+  },
+  {
+    id: 2,
+    title: 'Lead generation specialist portfolio',
+    description: 'A professional portfolio website for a lead generation specialist, highlighting expertise in driving qualified leads, optimizing sales funnels, and supporting business growth.',
+    technology: 'HTML, Tailwind CSS',
+    image: '/leadgeneration.png'
+  },
+  {
+    id: 3,
     title: 'E-Voting System',
     description: 'An E-Voting System is a digital platform that allows voters to cast their votes electronically instead of using traditional paper ballots. It ensures a secure, transparent, and efficient voting process.',
     technology: 'Reactjs, TypeScript, Tailwind CSS, Node.js, Express, MySQL, Supabase',
     image: '/evotingimg.png'
   },
   {
-    id: 2,
+    id: 4,
     title: 'Flexperience',
     description: 'A web-based solution bringing gym owners, trainers, and fitness enthusiasts together in a unified fitness management platform.',
     technology: 'HTML, CSS, Tailwind CSS, Node.js, Express, MySQL, Socket.io, Supabase',
     image: '/flexperience.png'
-  },
-  {
-    id: 3,
-    title: 'Eagle Mountain College Enrollment System',
-    description: 'An enrollment system allows users to easily register, track, and manage their participation in programs, courses, or events. It streamlines the process for both administrators and participants, offering a seamless experience for signing up, scheduling, and confirming attendance. Perfect for schools, gyms, or any organization that offers structured programs.',
-    technology: 'C#, MySQL',
-    image: '/enrollmentSystem.png'
   }
 ];
 
@@ -391,6 +461,14 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* Minimal custom styles */
+@media (max-width: 768px) {
+  .tracking-wide {
+    letter-spacing: 0.1em;
+  }
+}
+
+
 @keyframes slideIn {
   0% {
     transform: translateX(-100%);
