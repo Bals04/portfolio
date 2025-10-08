@@ -149,15 +149,6 @@
             <div class="relative mb-8 overflow-hidden rounded-xl" style="aspect-ratio: 16/9;">
               <img :src="project.image" :alt="project.title"
                 class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105">
-
-
-              <!-- Floating Badge -->
-              <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span
-                  class="inline-flex items-center px-3 py-1 bg-white/90 backdrop-blur-sm text-slate-700 text-xs font-medium rounded-full shadow-sm">
-                  View Project
-                </span>
-              </div>
             </div>
 
             <!-- Project Info -->
@@ -305,27 +296,34 @@ const techStack = [
 const projects = [
   {
     id: 1,
+    title: 'Uni Lux',
+    description: 'A promotional landing page for a luxury bag business based in metro manila',
+    technology: 'HTML, Tailwind CSS',
+    image: '/uniLux.png'
+  },
+  {
+    id: 2,
     title: 'XNY Events & Food services',
     description: 'A promotional landing page for an events and catering business in Davao.',
     technology: 'HTML, Tailwind CSS',
     image: '/xny.png'
   },
   {
-    id: 2,
+    id: 3,
     title: 'Lead generation specialist portfolio',
     description: 'A professional portfolio website for a lead generation specialist, highlighting expertise in driving qualified leads, optimizing sales funnels, and supporting business growth.',
     technology: 'HTML, Tailwind CSS',
     image: '/leadgeneration.png'
   },
   {
-    id: 3,
+    id: 4,
     title: 'E-Voting System',
     description: 'An E-Voting System is a digital platform that allows voters to cast their votes electronically instead of using traditional paper ballots. It ensures a secure, transparent, and efficient voting process.',
     technology: 'Reactjs, TypeScript, Tailwind CSS, Node.js, Express, MySQL, Supabase',
     image: '/evotingimg.png'
   },
   {
-    id: 4,
+    id: 5,
     title: 'Flexperience',
     description: 'A web-based solution bringing gym owners, trainers, and fitness enthusiasts together in a unified fitness management platform.',
     technology: 'HTML, CSS, Tailwind CSS, Node.js, Express, MySQL, Socket.io, Supabase',
