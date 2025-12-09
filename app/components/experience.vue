@@ -26,7 +26,6 @@
                         <div
                             class="absolute left-8 top-4 w-5 h-5 bg-[#1c1c1c] rounded-full border-4 border-white shadow-md transform -translate-x-1/2 z-10">
                         </div>
-
                         <!-- Card -->
                         <div
                             class="bg-white/90 backdrop-blur-md border border-gray-200 shadow-xl rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
@@ -37,10 +36,14 @@
                                 {{ exp.date }}
                             </span>
 
-                            <!-- Title -->
-                            <h3 class="text-2xl font-bold text-[#1c1c1c] mb-3">
-                                {{ exp.title }}
-                            </h3>
+                            <!-- Title + Company Logo -->
+                            <div class="flex items-center gap-4 mb-4">
+                                <img :src="exp.logo" alt="Company Logo"
+                                    class="h-12 w-12 rounded-full object-cover shadow-md" />
+                                <h3 class="text-2xl font-bold text-[#1c1c1c]">
+                                    {{ exp.title }}
+                                </h3>
+                            </div>
 
                             <!-- Description -->
                             <p class="text-gray-700 leading-relaxed mb-6">
@@ -65,67 +68,12 @@
 </template>
 
 <script lang="ts" setup>
-import { nextTick, onMounted, ref } from 'vue';
-
-const socialMediaLinks = [
-    { name: 'GitHub', url: 'https://github.com/bals04', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Github_logo_svg.svg/640px-Github_logo_svg.svg.png' },
-    { name: 'Facebook', url: 'https://facebook.com/jj.balsamo', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg' }
-];
-
-const techStack = [
-    { name: 'JavaScript', logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png' },
-    { name: 'Tailwind CSS', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg' },
-    { name: 'Vue.js', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg' },
-    { name: 'Nuxt.js', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Nuxt_logo.svg' },
-    { name: 'React', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg' },
-    { name: 'Node.js', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg' },
-    { name: 'Express.js', logo: 'https://img.icons8.com/color/512/express-js.png' },
-    { name: 'MySQL', logo: 'https://bgasparotto.com/wp-content/uploads/2015/05/mysql-logo.png' }
-];
-
-const projects = [
-    {
-        id: 1,
-        title: 'Uni Lux',
-        description: 'A promotional landing page for a luxury bag business based in metro manila',
-        technology: 'HTML, Tailwind CSS',
-        image: '/uniLux.png'
-    },
-    {
-        id: 2,
-        title: 'XNY Events & Food services',
-        description: 'A promotional landing page for an events and catering business in Davao.',
-        technology: 'HTML, Tailwind CSS',
-        image: '/xny.png'
-    },
-    {
-        id: 3,
-        title: 'Lead generation specialist portfolio',
-        description: 'A professional portfolio website for a lead generation specialist, highlighting expertise in driving qualified leads, optimizing sales funnels, and supporting business growth.',
-        technology: 'HTML, Tailwind CSS',
-        image: '/leadgeneration.png'
-    },
-    {
-        id: 4,
-        title: 'E-Voting System',
-        description: 'An E-Voting System is a digital platform that allows voters to cast their votes electronically instead of using traditional paper ballots. It ensures a secure, transparent, and efficient voting process.',
-        technology: 'Reactjs, TypeScript, Tailwind CSS, Node.js, Express, MySQL, Supabase',
-        image: '/evotingimg.png'
-    },
-    {
-        id: 5,
-        title: 'Flexperience',
-        description: 'A web-based solution bringing gym owners, trainers, and fitness enthusiasts together in a unified fitness management platform.',
-        technology: 'HTML, CSS, Tailwind CSS, Node.js, Express, MySQL, Socket.io, Supabase',
-        image: '/flexperience.png'
-    }
-];
-
 const experiences = [
     {
         id: 1,
         date: 'June 2025 - Present',
-        title: 'Front-End Web Developer — Awork Company, Denmark',
+        title: 'Front-End Web Developer — AWORK, Denmark',
+        logo: "/awork-logo.png",
         description:
             'Assigned as the Frontend Developer for AWORK ONE, One of Awork company’s product. I am responsible for integrating backend functionalities with the frontend, while designing and developing intuitive, user-friendly interfaces to ensure a seamless user experience.',
         technologies: [
@@ -146,7 +94,8 @@ const experiences = [
     {
         id: 2,
         date: 'January 2025 - June 2025',
-        title: 'Front-End Web Developer Intern — Awork Company, Denmark',
+        title: 'Front-End Web Developer Intern — AWORK, Denmark',
+        logo: "/awork-logo.png",
         description:
             'Assisted in building and enhancing the CitizenOne website using NuxtJS, Laravel, and TypeScript. Collaborated closely with senior developers to implement new features, resolve bugs, and optimize overall web performance and user experience.',
         technologies: [
@@ -163,10 +112,19 @@ const experiences = [
                 icon: 'https://bgasparotto.com/wp-content/uploads/2015/05/mysql-logo.png'
             }
         ]
+    },
+    {
+        id: 3,
+        date: 'July 2025',
+        title: 'BS Information Technology — STI College of Davao',
+        logo: '/sti-logo.png',
+        description:
+            'Graduated with a Bachelor of Science in Information Technology (BSIT), gaining strong foundational skills in software development, database systems, and modern web technologies. Awarded Best Capstone of the Year for an outstanding capstone project excellence.',
+        technologies: []
     }
+
 ]
 
-// Refs for sections and visibility states
 const textContainer = ref<HTMLElement | null>(null)
 const techSection = ref<HTMLElement | null>(null)
 const projectsSection = ref<HTMLElement | null>(null)
@@ -179,14 +137,6 @@ const projectsVisible = ref(false)
 const experienceTitleVisible = ref(false)
 const experienceItemsVisible = ref<boolean[]>([])
 
-function handleClick() {
-    const img = document.getElementById('heroImage') as HTMLImageElement | null;
-    if (img) {
-        img.src = '/alden_pose.png';
-    } else {
-        console.warn("Image with ID 'heroImage' not found.");
-    }
-}
 
 // Create intersection observer for scroll animations
 const createObserver = (element: HTMLElement, visibilityRef: any) => {
@@ -245,5 +195,4 @@ onMounted(() => {
         })
     })
 })
-
 </script>

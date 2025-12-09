@@ -51,16 +51,6 @@
                                                 <img :src="project.image" :alt="project.title"
                                                     class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110">
                                             </div>
-
-                                            <!-- View Project Overlay -->
-                                            <div
-                                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 z-20">
-                                                <div
-                                                    class="bg-white px-8 py-4 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                                                    <span class="text-sm font-bold text-slate-900 tracking-wide">View
-                                                        Project →</span>
-                                                </div>
-                                            </div>
                                         </div>
 
                                         <!-- Decorative element -->
@@ -113,30 +103,23 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Navigation Arrows -->
-                <button @click="previousSlide"
-                    class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 bg-slate-800 rounded-full shadow-xl flex items-center justify-center text-white transition-all duration-300 z-10 disabled:opacity-50 disabled:cursor-not-allowed"
-                    :disabled="currentIndex === 0">
+            </div>
+            <div class="flex items-center justify-center gap-6 mt-12">
+                <button @click="previousSlide" :disabled="currentIndex === 0"
+                    class="w-12 h-12 bg-slate-800 rounded-full shadow-xl flex items-center justify-center text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-
-                <button @click="nextSlide"
-                    class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 bg-slate-800 rounded-full shadow-xl flex items-center justify-center text-white transition-all duration-300 z-10 disabled:opacity-50 disabled:cursor-not-allowed"
-                    :disabled="currentIndex === projects.length - 1">
+                <span class="text-sm font-semibold text-slate-800">
+                    {{ currentIndex + 1 }} / {{ projects.length }}
+                </span>
+                <button @click="nextSlide" :disabled="currentIndex === projects.length - 1"
+                    class="w-12 h-12 bg-slate-800 rounded-full shadow-xl flex items-center justify-center text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </button>
-            </div>
-
-            <!-- Project Counter -->
-            <div class="text-center mt-12">
-                <span class="text-sm font-semibold text-slate-500">
-                    {{ currentIndex + 1 }} / {{ projects.length }}
-                </span>
             </div>
         </div>
     </section>
