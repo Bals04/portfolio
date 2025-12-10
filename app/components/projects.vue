@@ -1,7 +1,6 @@
 <template>
     <section ref="projectsSection" class="py-32 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
-            <!-- Enhanced Header -->
             <div class="mb-16 text-center" :class="projectsVisible ? 'opacity-100' : 'opacity-0'"
                 :style="projectsVisible ? 'transform: translateY(0); transition: all 0.8s ease-out;' : 'transform: translateY(20px); transition: all 0.8s ease-out;'">
 
@@ -13,7 +12,6 @@
                     Explore my works
                 </p>
 
-                <!-- Navigation Dots -->
                 <div class="flex items-center justify-center gap-2">
                     <button v-for="(project, index) in projects" :key="project.id" @click="goToSlide(index)"
                         class="transition-all duration-300" :class="currentIndex === index
@@ -23,26 +21,27 @@
                 </div>
             </div>
 
-            <!-- Carousel Container -->
             <div class="relative" :class="projectsVisible ? 'opacity-100' : 'opacity-0'"
                 :style="projectsVisible ? 'transform: translateY(0); transition: all 0.8s ease-out; transition-delay: 0.2s;' : 'transform: translateY(30px); transition: all 0.8s ease-out; transition-delay: 0.2s;'">
 
-                <!-- Carousel Wrapper -->
-                <div class="relative overflow-visible">
+                <div 
+                    ref="carouselWrapper" 
+                    class="relative overflow-visible touch-action-pan-y"
+                    @touchstart="handleTouchStart"
+                    @touchmove="handleTouchMove"
+                    @touchend="handleTouchEnd"
+                >
                     <div class="flex transition-transform duration-700 ease-out"
                         :style="`transform: translateX(-${currentIndex * 100}%)`">
 
-                        <!-- Project Cards -->
                         <div v-for="(project, index) in projects" :key="project.id" class="w-full flex-shrink-0 px-4">
 
                             <div class="max-w-5xl mx-auto">
                                 <div class="grid md:grid-cols-12 gap-8 items-center">
 
-                                    <!-- Project Image -->
                                     <div class="md:col-span-7 relative group">
                                         <div
                                             class="relative overflow-hidden rounded-2xl shadow-2xl transition-all duration-700 hover:shadow-3xl">
-                                            <!-- Gradient overlay -->
                                             <div
                                                 class="absolute inset-0 bg-gradient-to-tr from-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
                                             </div>
@@ -53,15 +52,12 @@
                                             </div>
                                         </div>
 
-                                        <!-- Decorative element -->
                                         <div
                                             class="absolute -bottom-6 -right-6 w-32 h-32 bg-slate-200 rounded-2xl -z-10 opacity-50">
                                         </div>
                                     </div>
 
-                                    <!-- Project Content -->
                                     <div class="md:col-span-5 space-y-6">
-                                        <!-- Project Number -->
                                         <div class="flex items-center gap-4">
                                             <div
                                                 class="w-12 h-12 rounded-full bg-gradient-to-br from-slate-800 to-slate-600 flex items-center justify-center shadow-lg">
@@ -73,17 +69,14 @@
                                             </div>
                                         </div>
 
-                                        <!-- Project Title -->
                                         <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
                                             {{ project.title }}
                                         </h3>
 
-                                        <!-- Description -->
                                         <p class="text-base leading-relaxed text-slate-600">
                                             {{ project.description }}
                                         </p>
 
-                                        <!-- Tech Stack -->
                                         <div class="pt-4">
                                             <div class="mb-3">
                                                 <span
@@ -132,6 +125,13 @@ const projectsSection = ref(null);
 const projectsVisible = ref(false);
 const currentIndex = ref(0);
 
+// --- SWIPE LOGIC STATE ---
+const carouselWrapper = ref(null);
+const touchStartX = ref(0);
+const touchEndX = ref(0);
+const SWIPE_THRESHOLD = 50; // Minimum horizontal distance in pixels to count as a swipe
+// -------------------------
+
 const projects = [
     {
         id: 1,
@@ -170,6 +170,7 @@ const projects = [
     }
 ];
 
+// --- CAROUSEL NAVIGATION FUNCTIONS ---
 const nextSlide = () => {
     if (currentIndex.value < projects.length - 1) {
         currentIndex.value++;
@@ -186,6 +187,39 @@ const goToSlide = (index) => {
     currentIndex.value = index;
 };
 
+// --- SWIPE HANDLERS IMPLEMENTATION ---
+const handleTouchStart = (e) => {
+    // Record the starting horizontal position of the first touch
+    touchStartX.value = e.touches[0].clientX;
+    touchEndX.value = e.touches[0].clientX;
+};
+
+const handleTouchMove = (e) => {
+    // Record the current horizontal position during the move
+    touchEndX.value = e.touches[0].clientX;
+};
+
+const handleTouchEnd = () => {
+    // Calculate the difference between start and end position
+    const diffX = touchStartX.value - touchEndX.value;
+    
+    // Check if the swipe distance exceeds the threshold
+    if (Math.abs(diffX) > SWIPE_THRESHOLD) {
+        if (diffX > 0) {
+            // Swiped Left (move to next slide)
+            nextSlide();
+        } else {
+            // Swiped Right (move to previous slide)
+            previousSlide();
+        }
+    }
+    
+    // Reset positions for the next swipe
+    touchStartX.value = 0;
+    touchEndX.value = 0;
+};
+// ------------------------------------
+
 // Keyboard navigation
 const handleKeyPress = (e) => {
     if (e.key === 'ArrowLeft') {
@@ -195,6 +229,7 @@ const handleKeyPress = (e) => {
     }
 };
 
+// Scroll visibility logic
 const handleScroll = () => {
     if (!projectsSection.value) return;
 
@@ -221,5 +256,10 @@ onUnmounted(() => {
 <style scoped>
 .shadow-3xl {
     box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom CSS to prevent vertical scroll interference during horizontal swipe */
+.touch-action-pan-y {
+    touch-action: pan-y;
 }
 </style>

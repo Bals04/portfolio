@@ -1,10 +1,10 @@
 <template>
-    <section class="py-20 bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-800">
-        <div class="max-w-5xl mx-auto px-6">
+    <section class="py-12 md:py-20 bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
 
             <!-- Section Title -->
             <h1 ref="experienceTitle"
-                class="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-20 tracking-tight"
+                class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-slate-900 mb-12 md:mb-20 tracking-tight"
                 :class="experienceTitleVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'"
                 style="transition: all 1s ease-out;">
                 Experience
@@ -12,49 +12,51 @@
 
             <div class="relative">
 
-                <!-- Glowing Timeline Line -->
+                <!-- Glowing Timeline Line - Hidden on mobile, visible on md+ -->
                 <div
-                    class="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300 rounded-full shadow-inner">
+                    class="hidden md:block absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300 rounded-full shadow-inner">
                 </div>
 
-                <div class="space-y-20">
+                <div class="space-y-8 md:space-y-20">
                     <!-- Experience Item -->
                     <div v-for="(exp, index) in experiences" :key="exp.id" :ref="(el) => (experienceItems[index] = el)"
                         :class="experienceItemsVisible[index] ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'"
-                        style="transition: all 0.9s ease-out;" class="relative pl-20">
-                        <!-- Timeline Dot -->
+                        style="transition: all 0.9s ease-out;" class="relative md:pl-20">
+
+                        <!-- Timeline Dot - Hidden on mobile -->
                         <div
-                            class="absolute left-8 top-4 w-5 h-5 bg-[#1c1c1c] rounded-full border-4 border-white shadow-md transform -translate-x-1/2 z-10">
+                            class="hidden md:block absolute left-8 top-4 w-5 h-5 bg-[#1c1c1c] rounded-full border-4 border-white shadow-md transform -translate-x-1/2 z-10">
                         </div>
+
                         <!-- Card -->
                         <div
-                            class="bg-white/90 backdrop-blur-md border border-gray-200 shadow-xl rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                            class="bg-white/90 backdrop-blur-md border border-gray-200 shadow-xl rounded-2xl p-4 sm:p-6 md:p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
 
                             <!-- Date -->
                             <span
-                                class="inline-block bg-[#1c1c1c] text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 shadow-md">
+                                class="inline-block bg-[#1c1c1c] text-white px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4 shadow-md">
                                 {{ exp.date }}
                             </span>
 
                             <!-- Title + Company Logo -->
-                            <div class="flex items-center gap-4 mb-4">
+                            <div class="flex items-start sm:items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
                                 <img :src="exp.logo" alt="Company Logo"
-                                    class="h-12 w-12 rounded-full object-cover shadow-md" />
-                                <h3 class="text-2xl font-bold text-[#1c1c1c]">
+                                    class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover shadow-md flex-shrink-0" />
+                                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-[#1c1c1c] leading-tight">
                                     {{ exp.title }}
                                 </h3>
                             </div>
 
                             <!-- Description -->
-                            <p class="text-gray-700 leading-relaxed mb-6">
+                            <p class="text-sm sm:text-base text-gray-700 leading-relaxed mb-4 sm:mb-6">
                                 {{ exp.description }}
                             </p>
 
                             <!-- Tech Stack -->
-                            <div class="flex flex-wrap gap-3">
+                            <div class="flex flex-wrap gap-2 sm:gap-3">
                                 <span v-for="tech in exp.technologies" :key="tech.name"
-                                    class="bg-gray-50 border border-gray-200 text-[#1c1c1c] py-1.5 px-4 rounded-full text-sm flex items-center gap-2 shadow-sm hover:bg-gray-100 transition">
-                                    <img :src="tech.icon" class="h-4 w-4" />
+                                    class="bg-gray-50 border border-gray-200 text-[#1c1c1c] py-1 sm:py-1.5 px-3 sm:px-4 rounded-full text-xs sm:text-sm flex items-center gap-1.5 sm:gap-2 shadow-sm hover:bg-gray-100 transition">
+                                    <img :src="tech.icon" class="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                                     {{ tech.name }}
                                 </span>
                             </div>

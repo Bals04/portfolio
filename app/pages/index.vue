@@ -51,19 +51,12 @@
 import { ref, onMounted } from 'vue'
 
 const isLoading = ref(true)
+const STATIC_LOADER_DURATION = 2000
 
 onMounted(() => {
-  // Wait for page to fully load
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      isLoading.value = false
-    }, 1000) // Small delay for smooth transition
-  })
-
-  // Fallback timeout in case load event already fired
   setTimeout(() => {
     isLoading.value = false
-  }, 3000)
+  }, STATIC_LOADER_DURATION)
 })
 </script>
 
