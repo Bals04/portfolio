@@ -40,6 +40,7 @@
         <Title>Jonhyl - Web Developer</Title>
         <Hero />
         <Projects />
+        <PersonalProjects />
         <Experience />
         <TechStack />
       </div>
