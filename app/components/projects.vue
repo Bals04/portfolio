@@ -142,7 +142,7 @@ const projects = [
         id: 5,
         title: 'Uni Lux',
         description: 'A bold, elegant landing page for a Metro Manila luxury bag brand. Minimal, refined, and built to elevate the product.',
-        image: '/uniLux.jpg'
+        image: '/unilux.jpg'
     },
     {
         id: 6,
