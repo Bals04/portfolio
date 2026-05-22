@@ -1,118 +1,107 @@
 <template>
-    <section ref="projectsSection" class="py-32 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="mb-16 text-center" :class="projectsVisible ? 'opacity-100' : 'opacity-0'"
+    <section ref="projectsSection"
+        class="relative overflow-hidden py-24 md:py-32 bg-gradient-to-br from-white via-gray-100 to-gray-200 text-[#1c1c1c]">
+
+        <!-- Halftone texture backdrop -->
+        <div class="absolute inset-0 projects-halftone opacity-50 pointer-events-none"></div>
+        <!-- Soft accent glow -->
+        <div
+            class="absolute left-1/2 top-1/3 -translate-x-1/2 w-[70%] h-[60%] bg-[radial-gradient(ellipse_at_center,rgba(28,28,28,0.10),transparent_70%)] blur-3xl pointer-events-none">
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-6">
+
+            <!-- Header -->
+            <div class="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-8"
+                :class="projectsVisible ? 'opacity-100' : 'opacity-0'"
                 :style="projectsVisible ? 'transform: translateY(0); transition: all 0.8s ease-out;' : 'transform: translateY(20px); transition: all 0.8s ease-out;'">
 
-                <h1 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">
-                    Featured Projects
-                </h1>
-
-                <p class="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
-                    Explore my works
-                </p>
-
-                <div class="flex items-center justify-center gap-2">
-                    <button v-for="(project, index) in projects" :key="project.id" @click="goToSlide(index)"
-                        class="transition-all duration-300" :class="currentIndex === index
-                            ? 'w-8 h-2 bg-slate-800 rounded-full'
-                            : 'w-2 h-2 bg-slate-300 rounded-full hover:bg-slate-400'">
-                    </button>
+                <div>
+                    <div class="text-xs uppercase tracking-[0.4em] text-gray-500 mb-3 flex items-center gap-3">
+                        <span class="w-8 h-px bg-[#1c1c1c]"></span> Work
+                    </div>
+                    <h1
+                        class="text-4xl md:text-6xl font-extrabold text-[#1c1c1c] tracking-tight leading-[1.2]">
+                        Featured <br class="hidden md:block" />
+                        <span
+                            class="inline-block pb-4 pr-2 bg-gradient-to-r from-[#1c1c1c] to-gray-500 bg-clip-text text-transparent italic">
+                            Projects
+                        </span>
+                    </h1>
                 </div>
             </div>
 
-            <div class="relative" :class="projectsVisible ? 'opacity-100' : 'opacity-0'"
+            <!-- Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10"
+                :class="projectsVisible ? 'opacity-100' : 'opacity-0'"
                 :style="projectsVisible ? 'transform: translateY(0); transition: all 0.8s ease-out; transition-delay: 0.2s;' : 'transform: translateY(30px); transition: all 0.8s ease-out; transition-delay: 0.2s;'">
 
-                <div 
-                    ref="carouselWrapper" 
-                    class="relative overflow-visible touch-action-pan-y"
-                    @touchstart="handleTouchStart"
-                    @touchmove="handleTouchMove"
-                    @touchend="handleTouchEnd"
-                >
-                    <div class="flex transition-transform duration-700 ease-out"
-                        :style="`transform: translateX(-${currentIndex * 100}%)`">
+                <div v-for="(project, index) in projects" :key="project.id"
+                    class="group relative">
 
-                        <div v-for="(project, index) in projects" :key="project.id" class="w-full flex-shrink-0 px-4">
+                    <!-- Decorative dots accent behind card -->
+                    <div
+                        class="absolute -bottom-4 -right-4 w-28 h-28 rounded-2xl projects-dots opacity-60 pointer-events-none">
+                    </div>
 
-                            <div class="max-w-5xl mx-auto">
-                                <div class="grid md:grid-cols-12 gap-8 items-center">
-
-                                    <div class="md:col-span-7 relative group">
-                                        <div
-                                            class="relative overflow-hidden rounded-2xl shadow-2xl transition-all duration-700 hover:shadow-3xl">
-                                            <div
-                                                class="absolute inset-0 bg-gradient-to-tr from-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
-                                            </div>
-
-                                            <div class="relative" style="aspect-ratio: 16/10;">
-                                                <img :src="project.image" :alt="project.title"
-                                                    class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110">
-                                            </div>
-                                        </div>
-
-                                        <div
-                                            class="absolute -bottom-6 -right-6 w-32 h-32 bg-slate-200 rounded-2xl -z-10 opacity-50">
-                                        </div>
-                                    </div>
-
-                                    <div class="md:col-span-5 space-y-6">
-                                        <div class="flex items-center gap-4">
-                                            <div
-                                                class="w-12 h-12 rounded-full bg-gradient-to-br from-slate-800 to-slate-600 flex items-center justify-center shadow-lg">
-                                                <span class="text-sm font-bold text-white">
-                                                    {{ String(index + 1).padStart(2, '0') }}
-                                                </span>
-                                            </div>
-                                            <div class="h-px flex-1 bg-gradient-to-r from-slate-300 to-transparent">
-                                            </div>
-                                        </div>
-
-                                        <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
-                                            {{ project.title }}
-                                        </h3>
-
-                                        <p class="text-base leading-relaxed text-slate-600">
-                                            {{ project.description }}
-                                        </p>
-
-                                        <div class="pt-4">
-                                            <div class="mb-3">
-                                                <span
-                                                    class="text-xs font-bold text-slate-500 tracking-widest uppercase">Tech
-                                                    Stack</span>
-                                            </div>
-                                            <div class="flex flex-wrap gap-2">
-                                                <span v-for="tech in project.technology.split(', ')" :key="tech"
-                                                    class="inline-flex items-center px-3 py-1.5 bg-white border-2 border-slate-200 text-slate-700 text-xs font-semibold rounded-lg hover:border-slate-400 hover:shadow-md transition-all duration-300 cursor-default">
-                                                    {{ tech }}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <!-- Image card -->
+                    <div
+                        class="relative overflow-hidden rounded-2xl shadow-xl bg-white transition-all duration-500 group-hover:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] group-hover:-translate-y-1">
+                        <!-- Browser top bar -->
+                        <div
+                            class="flex items-center gap-1.5 px-4 py-2.5 bg-gray-100/80 border-b border-gray-200">
+                            <span class="w-2.5 h-2.5 rounded-full bg-red-400/70"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-yellow-400/70"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-green-400/70"></span>
+                            <span
+                                class="ml-3 text-[10px] tracking-widest uppercase text-gray-400 truncate">
+                                {{ project.title }}
+                            </span>
+                        </div>
+                        <div class="relative overflow-hidden" style="aspect-ratio: 16/10;">
+                            <!-- Blurred backdrop fills empty space -->
+                            <img :src="project.image" alt=""
+                                aria-hidden="true"
+                                class="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-70" />
+                            <!-- Foreground image, fully visible -->
+                            <img :src="project.image" :alt="project.title"
+                                class="relative w-full h-full object-contain" />
+                            <div
+                                class="absolute inset-0 bg-gradient-to-tr from-[#1c1c1c]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                             </div>
                         </div>
                     </div>
+
+                    <!-- Text below image -->
+                    <div class="mt-6 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-3xl font-extrabold text-[#1c1c1c]/15 leading-none">
+                                {{ String(index + 1).padStart(2, '0') }}
+                            </span>
+                            <div class="h-px flex-1 bg-gradient-to-r from-[#1c1c1c]/30 to-transparent">
+                            </div>
+                        </div>
+
+                        <h3
+                            class="text-2xl md:text-3xl font-bold text-[#1c1c1c] tracking-tight leading-tight">
+                            {{ project.title }}
+                        </h3>
+
+                        <div v-if="project.award"
+                            class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-100 to-amber-50 border border-amber-300 text-amber-900 text-xs font-semibold shadow-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="w-3.5 h-3.5">
+                                <path
+                                    d="M5 3h14a1 1 0 0 1 1 1v3a5 5 0 0 1-4.546 4.98A6.002 6.002 0 0 1 13 15.917V19h3a1 1 0 1 1 0 2H8a1 1 0 1 1 0-2h3v-3.083A6.002 6.002 0 0 1 8.546 11.98 5 5 0 0 1 4 7V4a1 1 0 0 1 1-1zm1 2v2a3 3 0 0 0 2 2.83V5H6zm12 0h-2v4.83A3 3 0 0 0 20 7V5h-2z" />
+                            </svg>
+                            {{ project.award }}
+                        </div>
+
+                        <p class="text-sm md:text-base leading-relaxed text-gray-600">
+                            {{ project.description }}
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="flex items-center justify-center gap-6 mt-12">
-                <button @click="previousSlide" :disabled="currentIndex === 0"
-                    class="w-12 h-12 bg-slate-800 rounded-full shadow-xl flex items-center justify-center text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                <span class="text-sm font-semibold text-slate-800">
-                    {{ currentIndex + 1 }} / {{ projects.length }}
-                </span>
-                <button @click="nextSlide" :disabled="currentIndex === projects.length - 1"
-                    class="w-12 h-12 bg-slate-800 rounded-full shadow-xl flex items-center justify-center text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
             </div>
         </div>
     </section>
@@ -123,111 +112,64 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 const projectsSection = ref(null);
 const projectsVisible = ref(false);
-const currentIndex = ref(0);
-
-// --- SWIPE LOGIC STATE ---
-const carouselWrapper = ref(null);
-const touchStartX = ref(0);
-const touchEndX = ref(0);
-const SWIPE_THRESHOLD = 50; // Minimum horizontal distance in pixels to count as a swipe
-// -------------------------
 
 const projects = [
     {
         id: 1,
-        title: 'Uni Lux',
-        description: 'A promotional landing page for a luxury bag business based in Metro Manila',
-        technology: 'HTML, Tailwind CSS',
-        image: '/uniLux.png'
+        title: 'Chade Inanag',
+        description: 'A warm, appetite-stirring landing page for a beloved restaurant in Valencia, Bukidnon, built to make every visitor crave a seat at the table.',
+        image: '/chadeinanag.jpg'
     },
     {
         id: 2,
-        title: 'XNY Events & Food services',
-        description: 'A promotional landing page for an events and catering business in Davao.',
-        technology: 'HTML, Tailwind CSS',
-        image: '/xny.png'
+        title: 'GAB Matcha Bar',
+        description: 'A calm, earthy landing page for a matcha bar in Valencia, Bukidnon, designed to feel as smooth and grounded as the drinks they serve.',
+        image: '/gabmatcha.jpg'
     },
     {
         id: 3,
-        title: 'Lead generation specialist portfolio',
-        description: 'A professional portfolio website for a lead generation specialist, highlighting expertise in driving qualified leads, optimizing sales funnels, and supporting business growth.',
-        technology: 'HTML, Tailwind CSS',
-        image: '/leadgeneration.png'
+        title: 'DC Cakes',
+        description: 'A sweet, playful landing page for a cake shop in Bukidnon. Colorful, cheerful, and ready to turn browsers into buyers.',
+        image: '/dccakes.jpg'
     },
     {
         id: 4,
-        title: 'E-Voting System',
-        description: 'An E-Voting System is a digital platform that allows voters to cast their votes electronically instead of using traditional paper ballots. It ensures a secure, transparent, and efficient voting process.',
-        technology: 'Reactjs, TypeScript, Tailwind CSS, Node.js, Express, MySQL, Supabase',
-        image: '/evotingimg.png'
+        title: 'Home Meals by Raf & Nika',
+        description: 'A homey landing page for a Panabo City catering business, capturing the comfort of home-cooked meals served with love.',
+        image: '/homemeals.jpg'
     },
     {
         id: 5,
+        title: 'Uni Lux',
+        description: 'A bold, elegant landing page for a Metro Manila luxury bag brand. Minimal, refined, and built to elevate the product.',
+        image: '/uniLux.jpg'
+    },
+    {
+        id: 6,
+        title: 'XNY Events & Food Services',
+        description: 'A vibrant landing page for a Davao events and catering business, designed to turn special days into unforgettable ones.',
+        image: '/xny.jpg'
+    },
+    {
+        id: 7,
+        title: 'Lead Generation Specialist Portfolio',
+        description: 'A sharp, conversion-focused portfolio for a lead-gen pro, showcasing the funnels, results, and strategy that drive real business growth.',
+        image: '/leadgeneration.png'
+    },
+    {
+        id: 8,
+        title: 'E-Voting System',
+        description: 'A secure digital voting platform that swaps paper ballots for clean, transparent, and tamper-resistant elections, built for trust at scale.',
+        image: '/evotingimg.png'
+    },
+    {
+        id: 9,
         title: 'Flexperience',
-        description: 'A web-based solution bringing gym owners, trainers, and fitness enthusiasts together in a unified fitness management platform.',
-        technology: 'HTML, CSS, Tailwind CSS, Node.js, Express, MySQL, Socket.io, Supabase',
+        description: 'My capstone project. A unified fitness platform connecting gym owners, trainers, and members, built to make managing workouts and clients feel effortless.',
+        award: 'Best Capstone of the Year',
         image: '/flexperience.png'
     }
 ];
-
-// --- CAROUSEL NAVIGATION FUNCTIONS ---
-const nextSlide = () => {
-    if (currentIndex.value < projects.length - 1) {
-        currentIndex.value++;
-    }
-};
-
-const previousSlide = () => {
-    if (currentIndex.value > 0) {
-        currentIndex.value--;
-    }
-};
-
-const goToSlide = (index) => {
-    currentIndex.value = index;
-};
-
-// --- SWIPE HANDLERS IMPLEMENTATION ---
-const handleTouchStart = (e) => {
-    // Record the starting horizontal position of the first touch
-    touchStartX.value = e.touches[0].clientX;
-    touchEndX.value = e.touches[0].clientX;
-};
-
-const handleTouchMove = (e) => {
-    // Record the current horizontal position during the move
-    touchEndX.value = e.touches[0].clientX;
-};
-
-const handleTouchEnd = () => {
-    // Calculate the difference between start and end position
-    const diffX = touchStartX.value - touchEndX.value;
-    
-    // Check if the swipe distance exceeds the threshold
-    if (Math.abs(diffX) > SWIPE_THRESHOLD) {
-        if (diffX > 0) {
-            // Swiped Left (move to next slide)
-            nextSlide();
-        } else {
-            // Swiped Right (move to previous slide)
-            previousSlide();
-        }
-    }
-    
-    // Reset positions for the next swipe
-    touchStartX.value = 0;
-    touchEndX.value = 0;
-};
-// ------------------------------------
-
-// Keyboard navigation
-const handleKeyPress = (e) => {
-    if (e.key === 'ArrowLeft') {
-        previousSlide();
-    } else if (e.key === 'ArrowRight') {
-        nextSlide();
-    }
-};
 
 // Scroll visibility logic
 const handleScroll = () => {
@@ -243,13 +185,11 @@ const handleScroll = () => {
 
 onMounted(() => {
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('keydown', handleKeyPress);
     handleScroll();
 });
 
 onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
-    window.removeEventListener('keydown', handleKeyPress);
 });
 </script>
 
@@ -261,5 +201,17 @@ onUnmounted(() => {
 /* Custom CSS to prevent vertical scroll interference during horizontal swipe */
 .touch-action-pan-y {
     touch-action: pan-y;
+}
+
+.projects-halftone {
+    background-image: radial-gradient(rgba(28, 28, 28, 0.16) 1px, transparent 1px);
+    background-size: 14px 14px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+
+.projects-dots {
+    background-image: radial-gradient(rgba(28, 28, 28, 0.35) 1.3px, transparent 1.6px);
+    background-size: 10px 10px;
 }
 </style>
