@@ -1,64 +1,52 @@
 <template>
-  <div>
+  <div id="top">
     <!-- Loader -->
     <Transition name="fade">
       <div v-if="isLoading"
-        class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-white via-gray-50 to-gray-200 overflow-hidden">
+        class="fixed inset-0 z-[60] flex flex-col items-center justify-center overflow-hidden bg-bg">
 
-        <!-- Subtle grid pattern bg -->
-        <div class="absolute inset-0 loader-grid opacity-40 pointer-events-none"></div>
-
-        <!-- Center stack -->
-        <div class="relative z-10 flex flex-col items-center">
-
+        <div class="relative z-10 flex flex-col items-center text-ink">
           <!-- Monogram with concentric rings -->
-          <div class="relative w-40 h-40 flex items-center justify-center mb-10">
-            <!-- outer slow ring -->
-            <svg class="absolute inset-0 w-full h-full animate-spin-slow" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="48" fill="none" stroke="#1c1c1c" stroke-opacity="0.08"
-                stroke-width="1" />
-              <circle cx="50" cy="50" r="48" fill="none" stroke="#1c1c1c" stroke-width="1"
+          <div class="relative mb-8 flex h-32 w-32 items-center justify-center sm:mb-10 sm:h-40 sm:w-40">
+            <svg class="absolute inset-0 h-full w-full animate-spin-slow" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-opacity="0.12" stroke-width="1" />
+              <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width="1"
                 stroke-dasharray="20 280" stroke-linecap="round" />
             </svg>
-            <!-- inner reverse ring -->
-            <svg class="absolute inset-2 w-[calc(100%-1rem)] h-[calc(100%-1rem)] animate-spin-reverse"
+            <svg class="absolute inset-2 h-[calc(100%-1rem)] w-[calc(100%-1rem)] animate-spin-reverse"
               viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="44" fill="none" stroke="#1c1c1c" stroke-opacity="0.06"
-                stroke-width="1" />
-              <circle cx="50" cy="50" r="44" fill="none" stroke="#1c1c1c" stroke-width="1.5"
+              <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-opacity="0.1" stroke-width="1" />
+              <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="1.5"
                 stroke-dasharray="8 268" stroke-linecap="round" />
             </svg>
 
-            <!-- Monogram -->
-            <div
-              class="relative text-5xl font-extrabold tracking-tight bg-gradient-to-br from-[#1c1c1c] to-gray-500 bg-clip-text text-transparent">
-              JB
-            </div>
+            <div class="relative text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">JB</div>
           </div>
 
-          <!-- Caption -->
-          <div class="text-sm uppercase tracking-[0.3em] text-[#1c1c1c] font-medium">
+          <div class="text-xs font-medium uppercase tracking-[0.3em] text-ink sm:text-sm">
             Preparing portfolio
           </div>
         </div>
 
-        <!-- Bottom corner mark -->
         <div
-          class="absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-[0.3em] text-gray-400">
-          &copy; {{ new Date().getFullYear() }} &mdash; jb.dev
+          class="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.3em] text-g400">
+          © {{ year }} — jb.dev
         </div>
       </div>
     </Transition>
 
     <!-- Main Content -->
     <Transition name="fade">
-      <div v-if="!isLoading" class="bg-white text-gray-800">
-        <Title>Jonhyl - Web Developer</Title>
-        <Hero />
-        <Projects />
-        <PersonalProjects />
-        <Experience />
-        <TechStack />
+      <div v-if="!isLoading" class="bg-bg text-ink">
+        <Title>Jonhyl Balsamo — Web Developer</Title>
+        <Nav />
+        <main class="pb-28">
+          <Hero />
+          <Projects />
+          <PersonalProjects />
+          <Experience />
+          <TechStack />
+        </main>
       </div>
     </Transition>
   </div>
@@ -68,6 +56,7 @@
 import { ref, onMounted } from 'vue'
 
 const isLoading = ref(true)
+const year = 2026
 const STATIC_LOADER_DURATION = 2400
 
 onMounted(() => {
@@ -106,25 +95,5 @@ onMounted(() => {
 .animate-spin-reverse {
   animation: spin-reverse 4s linear infinite;
   transform-origin: center;
-}
-
-@keyframes loader-bar {
-  0% { transform: translateX(-100%); }
-  60% { transform: translateX(0); }
-  100% { transform: translateX(100%); }
-}
-
-.loader-bar {
-  width: 100%;
-  animation: loader-bar 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
-}
-
-.loader-grid {
-  background-image:
-    linear-gradient(rgba(28, 28, 28, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(28, 28, 28, 0.07) 1px, transparent 1px);
-  background-size: 40px 40px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
 }
 </style>

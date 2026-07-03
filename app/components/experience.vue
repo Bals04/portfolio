@@ -1,118 +1,83 @@
 <template>
-    <section class="py-12 md:py-20 bg-gradient-to-br from-white via-gray-100 to-gray-200 text-gray-800">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+    <section id="experience" ref="sectionRef" class="px-4 md:px-6 py-14 md:py-20 border-t border-g200">
+        <div class="mx-auto max-w-4xl">
 
-            <!-- Section Title -->
-            <h1 ref="experienceTitle"
-                class="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-slate-900 mb-12 md:mb-20 tracking-tight"
-                :class="experienceTitleVisible ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'"
-                style="transition: all 1s ease-out;">
-                Experience
-            </h1>
+            <div class="reveal mb-12" :class="{ in: visible }">
+                <p class="font-mono text-[10px] uppercase tracking-micro text-g400 mb-3">04 — experience</p>
+                <h2 class="font-pixel text-4xl md:text-5xl text-ink">Career</h2>
+            </div>
 
-            <div class="relative">
+            <div class="relative md:pl-8">
+                <!-- hairline rail -->
+                <div class="hidden md:block absolute left-0 top-1 bottom-1 w-px bg-g200"></div>
 
-                <!-- Glowing Timeline Line - Hidden on mobile, visible on md+ -->
-                <div
-                    class="hidden md:block absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-gray-300 via-gray-400 to-gray-300 rounded-full shadow-inner">
-                </div>
+                <div class="space-y-4 md:space-y-6">
+                    <article v-for="(exp, index) in experiences" :key="exp.id"
+                        class="reveal relative rounded-card border border-g200 bg-g50 p-5 md:p-6 shadow-soft"
+                        :class="{ in: visible }" :style="`animation-delay: ${100 + index * 70}ms`">
+                        <!-- node on the rail -->
+                        <span
+                            class="hidden md:block absolute -left-8 top-7 h-2.5 w-2.5 -translate-x-1/2 rounded-full border-2 border-bg bg-ink"></span>
 
-                <div class="space-y-8 md:space-y-20">
-                    <!-- Experience Item -->
-                    <div v-for="(exp, index) in experiences" :key="exp.id" :ref="(el) => (experienceItems[index] = el)"
-                        :class="experienceItemsVisible[index] ? 'animate-fadeInUp opacity-100' : 'opacity-0 translate-y-8'"
-                        style="transition: all 0.9s ease-out;" class="relative md:pl-20">
+                        <span
+                            class="inline-block rounded-full bg-ink px-3 py-1 font-mono text-[9px] uppercase tracking-micro text-bg">
+                            {{ exp.date }}
+                        </span>
 
-                        <!-- Timeline Dot - Hidden on mobile -->
-                        <div
-                            class="hidden md:block absolute left-8 top-4 w-5 h-5 bg-[#1c1c1c] rounded-full border-4 border-white shadow-md transform -translate-x-1/2 z-10">
+                        <div class="mt-4 flex items-center gap-3">
+                            <div class="flex h-9 w-9 items-center justify-center overflow-hidden rounded-sm2 border border-g200 bg-white">
+                                <img :src="exp.logo" alt="" class="h-full w-full object-contain p-1" />
+                            </div>
+                            <h3 class="text-base md:text-lg font-semibold leading-tight tracking-tight text-ink">
+                                {{ exp.title }}
+                            </h3>
                         </div>
 
-                        <!-- Card -->
-                        <div
-                            class="bg-white/90 backdrop-blur-md border border-gray-200 shadow-xl rounded-2xl p-4 sm:p-6 md:p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                        <p class="mt-3 text-[13px] leading-relaxed text-g500">{{ exp.description }}</p>
 
-                            <!-- Date -->
-                            <span
-                                class="inline-block bg-[#1c1c1c] text-white px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-semibold mb-3 sm:mb-4 shadow-md">
-                                {{ exp.date }}
+                        <div v-if="exp.technologies.length" class="mt-4 flex flex-wrap gap-2">
+                            <span v-for="tech in exp.technologies" :key="tech.name"
+                                class="inline-flex items-center gap-1.5 rounded-full border border-g300 px-2 py-0.5 font-mono text-[9px] uppercase tracking-micro text-g500">
+                                <img :src="tech.icon" class="h-3 w-3" alt="" />
+                                {{ tech.name }}
                             </span>
-
-                            <!-- Title + Company Logo -->
-                            <div class="flex items-start sm:items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-                                <img :src="exp.logo" alt="Company Logo"
-                                    class="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover shadow-md flex-shrink-0" />
-                                <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-[#1c1c1c] leading-tight">
-                                    {{ exp.title }}
-                                </h3>
-                            </div>
-
-                            <!-- Description -->
-                            <p class="text-sm sm:text-base text-gray-700 leading-relaxed mb-4 sm:mb-6">
-                                {{ exp.description }}
-                            </p>
-
-                            <!-- Tech Stack -->
-                            <div class="flex flex-wrap gap-2 sm:gap-3">
-                                <span v-for="tech in exp.technologies" :key="tech.name"
-                                    class="bg-gray-50 border border-gray-200 text-[#1c1c1c] py-1 sm:py-1.5 px-3 sm:px-4 rounded-full text-xs sm:text-sm flex items-center gap-1.5 sm:gap-2 shadow-sm hover:bg-gray-100 transition">
-                                    <img :src="tech.icon" class="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                                    {{ tech.name }}
-                                </span>
-                            </div>
                         </div>
-                    </div>
-
+                    </article>
                 </div>
             </div>
         </div>
     </section>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const sectionRef = ref<HTMLElement | null>(null)
+const visible = ref(false)
+
 const experiences = [
     {
         id: 1,
         date: 'June 2025 - Present',
         title: 'Front-End Web Developer — AWORK, Denmark',
-        logo: "/awork-logo.png",
-        description:
-            'Assigned as the Frontend Developer for AWORK ONE, One of Awork company’s product. I am responsible for integrating backend functionalities with the frontend, while designing and developing intuitive, user-friendly interfaces to ensure a seamless user experience.',
+        logo: '/awork-logo.png',
+        description: 'Assigned as the Frontend Developer for AWORK ONE, one of Awork company’s products. I am responsible for integrating backend functionalities with the frontend, while designing and developing intuitive, user-friendly interfaces to ensure a seamless user experience.',
         technologies: [
-            {
-                name: 'Laravel',
-                icon: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg'
-            },
-            {
-                name: 'Nuxt.js',
-                icon: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Nuxt_logo.svg'
-            },
-            {
-                name: 'MySQL',
-                icon: 'https://bgasparotto.com/wp-content/uploads/2015/05/mysql-logo.png'
-            }
+            { name: 'Laravel', icon: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg' },
+            { name: 'Nuxt.js', icon: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Nuxt_logo.svg' },
+            { name: 'MySQL', icon: 'https://bgasparotto.com/wp-content/uploads/2015/05/mysql-logo.png' }
         ]
     },
     {
         id: 2,
         date: 'January 2025 - June 2025',
         title: 'Front-End Web Developer Intern — AWORK, Denmark',
-        logo: "/awork-logo.png",
-        description:
-            'Assisted in building and enhancing the CitizenOne website using NuxtJS, Laravel, and TypeScript. Collaborated closely with senior developers to implement new features, resolve bugs, and optimize overall web performance and user experience.',
+        logo: '/awork-logo.png',
+        description: 'Assisted in building and enhancing the CitizenOne website using NuxtJS, Laravel, and TypeScript. Collaborated closely with senior developers to implement new features, resolve bugs, and optimize overall web performance and user experience.',
         technologies: [
-            {
-                name: 'Laravel',
-                icon: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg'
-            },
-            {
-                name: 'Nuxt.js',
-                icon: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Nuxt_logo.svg'
-            },
-            {
-                name: 'MySQL',
-                icon: 'https://bgasparotto.com/wp-content/uploads/2015/05/mysql-logo.png'
-            }
+            { name: 'Laravel', icon: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg' },
+            { name: 'Nuxt.js', icon: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Nuxt_logo.svg' },
+            { name: 'MySQL', icon: 'https://bgasparotto.com/wp-content/uploads/2015/05/mysql-logo.png' }
         ]
     },
     {
@@ -120,81 +85,19 @@ const experiences = [
         date: 'July 2025',
         title: 'BS Information Technology — STI College of Davao',
         logo: '/sti-logo.png',
-        description:
-            'Graduated with a Bachelor of Science in Information Technology (BSIT), gaining strong foundational skills in software development, database systems, and modern web technologies. Awarded Best Capstone of the Year for an outstanding capstone project excellence.',
+        description: 'Graduated with a Bachelor of Science in Information Technology (BSIT), gaining strong foundational skills in software development, database systems, and modern web technologies. Awarded Best Capstone of the Year for outstanding capstone project excellence.',
         technologies: []
     }
-
 ]
 
-const textContainer = ref<HTMLElement | null>(null)
-const techSection = ref<HTMLElement | null>(null)
-const projectsSection = ref<HTMLElement | null>(null)
-const experienceTitle = ref<HTMLElement | null>(null)
-const experienceItems = ref<HTMLElement[]>([]) as any
-
-const textVisible = ref(false)
-const techVisible = ref(false)
-const projectsVisible = ref(false)
-const experienceTitleVisible = ref(false)
-const experienceItemsVisible = ref<boolean[]>([])
-
-
-// Create intersection observer for scroll animations
-const createObserver = (element: HTMLElement, visibilityRef: any) => {
-    const observer = new IntersectionObserver(
-        ([entry]) => {
-            if (entry?.isIntersecting) {
-                visibilityRef.value = true
-                observer.disconnect()
-            }
-        },
-        { threshold: 0.1 }
-    )
-
-    observer.observe(element)
+const handleScroll = () => {
+    if (!sectionRef.value) return
+    if (sectionRef.value.getBoundingClientRect().top < window.innerHeight * 0.85) visible.value = true
 }
 
 onMounted(() => {
-    // Initialize experience items visibility array
-    experienceItemsVisible.value = new Array(experiences.length).fill(false)
-
-    // Observer for hero text
-    if (textContainer.value) {
-        createObserver(textContainer.value, textVisible)
-    }
-
-    // Observer for tech section
-    if (techSection.value) {
-        createObserver(techSection.value, techVisible)
-    }
-
-    // Observer for projects section
-    if (projectsSection.value) {
-        createObserver(projectsSection.value, projectsVisible)
-    }
-
-    // Observer for experience title
-    if (experienceTitle.value) {
-        createObserver(experienceTitle.value, experienceTitleVisible)
-    }
-
-    // Individual observers for each experience item
-    nextTick(() => {
-        experienceItems.value.forEach((item: any, index: any) => {
-            if (item) {
-                const observer = new IntersectionObserver(
-                    ([entry]) => {
-                        if (entry?.isIntersecting) {
-                            experienceItemsVisible.value[index] = true
-                            observer.disconnect()
-                        }
-                    },
-                    { threshold: 0.2 }
-                )
-                observer.observe(item)
-            }
-        })
-    })
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
 })
+onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 </script>

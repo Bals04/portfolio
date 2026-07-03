@@ -1,34 +1,70 @@
 <template>
-    <section ref="sectionRef" class="personal-section overflow-hidden">
-        <div class="personal-grid"></div>
+    <section id="personal" ref="sectionRef" class="relative overflow-hidden px-4 md:px-6 py-14 md:py-20 border-t border-g200">
+        <div class="mx-auto max-w-4xl">
 
-        <div class="personal-shell">
-            <div class="personal-header" :class="visible ? 'is-visible' : ''">
-                <div class="personal-header-text">
-                    <h2>Personal Projects</h2>
-                    <p class="personal-copy">
-                        Meet <strong class="name-baw">BAW</strong>, the no-nonsense bull who keeps me lifting, and <strong class="name-veeh">VEEH</strong>, the buzzing bee watching over my wallet, The two mascots leading my little universe of passion projects.
+            <!-- header -->
+            <div class="reveal grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-8 mb-12"
+                :class="{ in: visible }">
+                <div>
+                    <p class="font-mono text-[10px] uppercase tracking-micro text-g400 mb-3">03 — personal</p>
+                    <h2 class="font-pixel text-4xl md:text-5xl text-ink">Side Quests</h2>
+                    <p class="mt-6 max-w-lg font-serif text-[1.0625rem] leading-[1.75] text-g500">
+                        Meet <span class="font-mono text-xs uppercase tracking-micro text-ink">BAW</span>, the
+                        no-nonsense bull who keeps me lifting, and
+                        <span class="font-mono text-xs uppercase tracking-micro text-ink">VEEH</span>, the buzzing bee
+                        watching over my wallet — the two mascots leading my little universe of passion projects.
                     </p>
                 </div>
-
-                <div class="personal-mascots">
-                    <img src="/personal-projects/mascot-collab.png" alt="DevBiz mascot collaboration" />
+                <div class="flex justify-center md:justify-end">
+                    <img src="/personal-projects/mascot-collab.png" alt="DevBiz mascot collaboration"
+                        class="w-full max-w-[16rem]" style="image-rendering: pixelated;" />
                 </div>
             </div>
 
-            <div class="personal-cards" :class="visible ? 'is-visible' : ''">
-                <article v-for="project in projects" :key="project.id" class="personal-card">
-                    <div class="personal-card-media">
-                        <img :src="project.image" :alt="project.title" />
+            <!-- deck counter -->
+            <div class="reveal mb-4 flex items-center justify-between" :class="{ in: visible }"
+                style="animation-delay: 80ms">
+                <span class="font-mono text-[10px] uppercase tracking-micro text-g400">click a card</span>
+                <span class="font-mono text-[10px] uppercase tracking-micro text-g400">
+                    {{ String(active + 1).padStart(2, '0') }} / {{ String(projects.length).padStart(2, '0') }}
+                </span>
+            </div>
+
+            <!-- fanned deck -->
+            <div class="reveal relative mx-auto h-[420px] select-none overflow-hidden sm:h-[460px]"
+                :class="{ in: visible }" style="animation-delay: 120ms">
+                <div v-for="(project, index) in projects" :key="project.id"
+                    class="absolute left-1/2 top-1/2 w-[270px] sm:w-[320px] md:w-[360px] -translate-x-1/2 -translate-y-1/2 cursor-pointer overflow-hidden rounded-card border border-g200 bg-bg shadow-soft transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    :style="cardStyle(index)" @click="onCardClick(index)"
+                    :aria-hidden="index !== active" :tabindex="index === active ? 0 : -1">
+
+                    <div class="relative overflow-hidden border-b border-g200 bg-g50" style="aspect-ratio: 16/9;">
+                        <img :src="project.image" :alt="project.title" class="h-full w-full object-cover" />
                     </div>
-                    <div class="personal-card-body">
-                        <div class="personal-card-topline">
-                            <span>{{ project.category }}</span>
-                        </div>
-                        <h4>{{ project.title }}</h4>
-                        <p>{{ project.description }}</p>
+
+                    <div class="p-5">
+                        <span
+                            class="inline-flex items-center gap-1 rounded-full bg-ink px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-micro text-bg">
+                            <span>‹</span>{{ project.category }}<span>›</span>
+                        </span>
+                        <h3 class="mt-3 text-lg font-semibold tracking-tight text-ink">{{ project.title }}</h3>
+                        <p class="mt-2 text-[13px] leading-relaxed text-g500">{{ project.description }}</p>
                     </div>
-                </article>
+                </div>
+            </div>
+
+            <!-- controls -->
+            <div class="reveal mt-2 flex items-center justify-center gap-6" :class="{ in: visible }"
+                style="animation-delay: 200ms">
+                <button type="button" aria-label="Previous" @click="prev"
+                    class="flex h-9 w-9 items-center justify-center rounded-full border border-g200 text-g500 transition-colors hover:border-g300 hover:text-ink">←</button>
+                <div class="flex items-center gap-2">
+                    <button v-for="(p, i) in projects" :key="p.id" type="button" :aria-label="`Go to ${p.title}`"
+                        @click="activate(i)" class="h-1.5 rounded-full transition-all duration-300"
+                        :class="i === active ? 'w-5 bg-ink' : 'w-1.5 bg-g300 hover:bg-g400'"></button>
+                </div>
+                <button type="button" aria-label="Next" @click="next"
+                    class="flex h-9 w-9 items-center justify-center rounded-full border border-g200 text-g500 transition-colors hover:border-g300 hover:text-ink">→</button>
             </div>
         </div>
     </section>
@@ -39,277 +75,66 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 const sectionRef = ref(null);
 const visible = ref(false);
+const active = ref(0);
+// the card most recently sent forward — kept on top for the whole glide
+const lifting = ref(0);
 
 const projects = [
     {
         id: 1,
         title: 'Gym Progress Tracker',
         category: 'Fitness · Personal App',
-        description:
-            'A calendar-style training log to plan, edit and review weekly sessions. Tracks volume, active days and exercise breakdowns at a glance.',
-        technology: 'Vue, Nuxt, Tailwind CSS',
+        description: 'A calendar-style training log to plan, edit and review weekly sessions. Tracks volume, active days and exercise breakdowns at a glance.',
         image: '/personal-projects/Screenshot%202026-05-16%20151733.png'
     },
     {
         id: 2,
         title: 'BuzzBudget',
         category: 'Finance · Personal App',
-        description:
-            'A friendly personal finance tracker with a built-in mascot guide. Manage budgets, log spending and move money to savings, all in one calm dashboard.',
-        technology: 'Vue, Nuxt, Tailwind CSS',
+        description: 'A friendly personal finance tracker with a built-in mascot guide. Manage budgets, log spending and move money to savings, all in one calm dashboard.',
         image: '/personal-projects/Screenshot%202026-05-16%20151836.png'
     }
 ];
 
+// Fan each card out relative to the active one.
+const cardStyle = (index) => {
+    const n = projects.length;
+    let pos = index - active.value;
+    if (pos > n / 2) pos -= n;
+    if (pos < -n / 2) pos += n;
+    const abs = Math.abs(pos);
+
+    // the just-clicked card rides on top for the entire transition, so you
+    // watch it travel over the deck instead of snapping in front.
+    const onTop = index === lifting.value ? 60 : 0;
+
+    if (pos === 0) {
+        return `transform: translate(-50%,-50%) scale(1.04); opacity:1; z-index:${Math.max(50, onTop)};`;
+    }
+    if (abs > 3) {
+        return 'transform: translate(-50%,-50%) scale(0.8); opacity:0; z-index:0; pointer-events:none;';
+    }
+    const x = pos * 52;
+    const y = abs * 18;
+    const rot = pos * 6;
+    const scale = 1 - abs * 0.07;
+    const opacity = abs <= 2 ? 0.6 : 0.3;
+    return `transform: translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) rotate(${rot}deg) scale(${scale}); opacity:${opacity}; z-index:${onTop || (40 - abs)};`;
+};
+
+const activate = (i) => { lifting.value = i; active.value = i; };
+const onCardClick = (i) => { i === active.value ? next() : activate(i); };
+const next = () => { const i = (active.value + 1) % projects.length; activate(i); };
+const prev = () => { const i = (active.value - 1 + projects.length) % projects.length; activate(i); };
+
 const handleScroll = () => {
     if (!sectionRef.value) return;
-    const rect = sectionRef.value.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.82) visible.value = true;
+    if (sectionRef.value.getBoundingClientRect().top < window.innerHeight * 0.85) visible.value = true;
 };
 
 onMounted(() => {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
 });
-
-onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
-});
+onUnmounted(() => window.removeEventListener('scroll', handleScroll));
 </script>
-
-<style scoped>
-.personal-section {
-    position: relative;
-    background: linear-gradient(180deg, #0f172a 0%, #111827 60%, #0b1220 100%);
-    color: #e2e8f0;
-    padding: 7rem 0 6rem;
-}
-
-.personal-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
-    background-size: 8rem 8rem;
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.2));
-    pointer-events: none;
-}
-
-.personal-shell {
-    position: relative;
-    max-width: 96rem;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-.personal-header,
-.personal-cards {
-    opacity: 0;
-    transform: translateY(1.5rem);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.personal-header.is-visible,
-.personal-cards.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.personal-header {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 2.5rem;
-}
-
-.personal-header-text {
-    text-align: left;
-}
-
-.personal-mascots {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.personal-mascots img {
-    width: 100%;
-    max-width: 26rem;
-    height: auto;
-    image-rendering: pixelated;
-    filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.45));
-}
-
-.personal-badge {
-    display: grid;
-    place-items: center;
-    width: 4rem;
-    height: 4rem;
-    border-radius: 1rem;
-    background: linear-gradient(180deg, #f8fafc, #cbd5e1);
-    color: #0f172a;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
-}
-
-.personal-badge-icon {
-    width: 1.65rem;
-    height: 1.65rem;
-}
-
-.personal-eyebrow {
-    margin: 0 0 0.25rem;
-    color: #94a3b8;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-}
-
-.personal-header-text h2 {
-    margin: 0;
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.05em;
-    color: #f8fafc;
-}
-
-.personal-copy {
-    max-width: 36rem;
-    margin: 1.25rem 0 0;
-    color: #94a3b8;
-    font-size: 1.05rem;
-    line-height: 1.8;
-}
-
-.name-baw {
-    color: #4ade80;
-}
-
-.name-veeh {
-    color: #facc15;
-}
-
-.personal-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem;
-}
-
-.personal-tags span {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.55rem 0.85rem;
-    border-radius: 999px;
-    background: rgba(248, 250, 252, 0.06);
-    border: 1px solid rgba(148, 163, 184, 0.22);
-    color: #e2e8f0;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-.personal-cards {
-    margin-top: 1.5rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.75rem;
-    transition-delay: 0.28s;
-}
-
-.personal-card {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border-radius: 1.5rem;
-    background: linear-gradient(160deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.7));
-    border: 1px solid rgba(148, 163, 184, 0.16);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-    transition: transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
-}
-
-.personal-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(148, 163, 184, 0.35);
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45);
-}
-
-.personal-card-media {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background: #0b1220;
-}
-
-.personal-card-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.personal-card-body {
-    padding: 1.5rem 1.5rem 1.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-.personal-card-topline {
-    color: #94a3b8;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-}
-
-.personal-card-body h4 {
-    margin: 0;
-    font-size: 1.5rem;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: #f8fafc;
-}
-
-.personal-card-body p {
-    margin: 0;
-    color: #cbd5e1;
-    font-size: 0.95rem;
-    line-height: 1.65;
-}
-
-@media (max-width: 768px) {
-    .personal-section {
-        padding: 5.5rem 0 4.5rem;
-    }
-
-    .personal-shell {
-        padding: 0 1rem;
-    }
-
-    .personal-header {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 2rem;
-    }
-
-    .personal-header-text {
-        text-align: center;
-    }
-
-    .personal-copy {
-        margin: 1.25rem auto 0;
-    }
-
-    .personal-mascots {
-        justify-content: center;
-    }
-
-    .personal-mascots img {
-        max-width: 20rem;
-    }
-
-    .personal-cards {
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-    }
-}
-</style>
