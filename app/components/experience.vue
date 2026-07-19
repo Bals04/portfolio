@@ -55,10 +55,12 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const sectionRef = ref<HTMLElement | null>(null)
 const visible = ref(false)
 
+const currentMonthYear = new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })
+
 const experiences = [
     {
         id: 1,
-        date: 'June 2025 - Present',
+        date: `June 2025 - ${currentMonthYear}`,
         title: 'Front-End Web Developer — AWORK, Denmark',
         logo: '/awork-logo.png',
         description: 'Assigned as the Frontend Developer for AWORK ONE, one of Awork company’s products. I am responsible for integrating backend functionalities with the frontend, while designing and developing intuitive, user-friendly interfaces to ensure a seamless user experience.',

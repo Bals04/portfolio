@@ -35,7 +35,9 @@
                             <span class="font-mono text-[10px] text-g400">{{ String(index + 1).padStart(2, '0') }}</span>
                             <span class="h-px flex-1 bg-g200"></span>
                             <span v-if="project.award"
-                                class="rounded-full bg-ink px-2 py-0.5 font-mono text-[9px] uppercase tracking-micro text-bg">featured</span>
+                                class="inline-flex items-center gap-1 rounded-full bg-ink px-2 py-0.5 font-mono text-[9px] uppercase tracking-micro text-bg">
+                                <span>‹</span>{{ project.award }}<span>›</span>
+                            </span>
                         </div>
                         <h3 class="text-lg font-semibold tracking-tight text-ink">{{ project.title }}</h3>
                         <p class="mt-2 text-[13px] leading-relaxed text-g500">{{ project.description }}</p>

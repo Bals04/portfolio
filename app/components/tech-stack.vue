@@ -17,7 +17,8 @@
                         <div v-for="item in category.items" :key="item.name"
                             class="flex flex-col items-center justify-center gap-3 border-r border-b border-g200 p-6">
                             <img :src="item.icon" :alt="item.name + ' icon'"
-                                class="h-8 w-8 object-contain grayscale opacity-80 transition-all duration-200 hover:grayscale-0 hover:opacity-100" />
+                                class="h-8 w-8 object-contain opacity-90 transition-all duration-200 hover:scale-110 hover:opacity-100"
+                                :class="{ 'dark:invert': item.invertDark }" />
                             <span class="font-mono text-[10px] uppercase tracking-micro text-g500">{{ item.name }}</span>
                         </div>
                     </div>
@@ -60,11 +61,11 @@ const categories = [
         title: "Backend",
         items: [
             { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-            { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
-            { name: "Prisma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg" },
+            { name: "Express", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg", invertDark: true },
+            { name: "Prisma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg", invertDark: true },
             { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
-            { name: "Socket.IO", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg" },
-            { name: "JWT", icon: "https://cdn.worldvectorlogo.com/logos/jwt-3.svg" },
+            { name: "Socket.IO", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/socketio/socketio-original.svg", invertDark: true },
+            { name: "Supabase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg" },
         ]
     },
     {
