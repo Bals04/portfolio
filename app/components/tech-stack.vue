@@ -12,8 +12,10 @@
                     :class="{ in: visible }" :style="`animation-delay: ${100 + ci * 70}ms`">
                     <p class="font-mono text-[10px] uppercase tracking-micro text-g400 mb-4">{{ category.title }}</p>
 
-                    <!-- hairline-divided cell grid: the dividers are the design -->
-                    <div class="grid grid-cols-3 border-l border-t border-g200 rounded-card overflow-hidden">
+                    <!-- hairline-divided cell grid: the dividers are the design.
+                         Column count adapts so a short group still fills its row. -->
+                    <div class="grid border-l border-t border-g200 rounded-card overflow-hidden"
+                        :style="`grid-template-columns: repeat(${colsFor(category.items.length)}, minmax(0, 1fr))`">
                         <div v-for="item in category.items" :key="item.name"
                             class="flex flex-col items-center justify-center gap-3 border-r border-b border-g200 p-6">
                             <img :src="item.icon" :alt="item.name + ' icon'"
@@ -78,8 +80,20 @@ const categories = [
             { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
             { name: "Shopify", icon: "https://www.svgrepo.com/show/303503/shopify-logo.svg" },
         ]
+    },
+    {
+        title: "AI",
+        items: [
+            { name: "Claude Code", icon: "https://unpkg.com/@lobehub/icons-static-svg@latest/icons/claude-color.svg" },
+            { name: "Codex", icon: "https://unpkg.com/@lobehub/icons-static-svg@latest/icons/openai.svg", invertDark: true },
+        ]
     }
 ]
+
+// Pick a column count that divides the item count evenly so every row is
+// full — no empty cells. Groups of 6 stay 3-wide; the 2-item AI group is
+// 2-wide. Falls back to 3 for anything not cleanly divisible.
+const colsFor = (count) => (count % 3 === 0 ? 3 : count % 2 === 0 ? 2 : 3)
 
 const handleScroll = () => {
     if (!sectionRef.value) return
