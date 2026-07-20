@@ -23,12 +23,18 @@
 
                     <div class="reveal mt-10 flex flex-wrap items-center gap-6" :class="{ in: shown }"
                         style="animation-delay: 260ms">
-                        <!-- inverted chip — the one loud element -->
-                        <a href="https://facebook.com/jj.balsamo"
-                            class="inline-flex items-center gap-2 rounded-input bg-ink px-4 py-2.5 font-mono text-xs text-bg transition-opacity hover:opacity-80">
-                            schedule call
-                            <span class="transition-transform group-hover:translate-x-0.5">↗</span>
-                        </a>
+                        <!-- inverted chips — the loud pair -->
+                        <div class="flex items-center gap-3">
+                            <a href="https://facebook.com/jj.balsamo"
+                                class="inline-flex items-center rounded-input bg-ink px-4 py-2.5 font-mono text-xs text-bg transition-opacity hover:opacity-80">
+                                schedule a call
+                            </a>
+
+                            <button type="button" @click="resumeOpen = true"
+                                class="inline-flex items-center rounded-input bg-ink px-4 py-2.5 font-mono text-xs text-bg transition-opacity hover:opacity-80">
+                                view resume
+                            </button>
+                        </div>
 
                         <div class="flex items-center gap-4">
                             <span class="font-mono text-[10px] uppercase tracking-micro text-g400">socials</span>
@@ -53,6 +59,8 @@
                 </div>
             </div>
         </div>
+
+        <ResumeModal :open="resumeOpen" @close="resumeOpen = false" />
     </section>
 </template>
 
@@ -60,6 +68,7 @@
 import { onMounted, ref } from 'vue'
 
 const shown = ref(false)
+const resumeOpen = ref(false)
 
 const socials = [
     {
