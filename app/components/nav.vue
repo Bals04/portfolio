@@ -29,6 +29,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
+import { useTheme } from '~/composables/useTheme'
 
 const { theme, init, set } = useTheme()
 const active = ref('work')
