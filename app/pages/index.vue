@@ -47,6 +47,8 @@
           <Experience />
           <TechStack />
         </main>
+        <ChatWidget />
+        <TypingTest />
       </div>
     </Transition>
   </div>
