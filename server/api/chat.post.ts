@@ -267,5 +267,10 @@ export default defineEventHandler(async (event) => {
     )
   }
 
-  return { reply: reply.trim() }
+  return {
+    reply: reply.trim(),
+    // Safe to expose for debugging: this contains only the provider slot and
+    // model id (for example, "main:gemini-flash-lite-latest"), never the key.
+    servedBy,
+  }
 })

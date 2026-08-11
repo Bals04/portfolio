@@ -378,12 +378,13 @@ async function send(preset?: string) {
     await nextTick(scrollToBottom)
 
     try {
-        const data = await $fetch<{ reply: string }>('/api/chat', {
+        const data = await $fetch<{ reply: string; servedBy: string }>('/api/chat', {
             method: 'POST',
             // Send the running conversation so BIA remembers the thread, as
             // role/content only: `icons` is ours to render, not hers to read.
             body: { messages: messages.value.map(({ role, content }) => ({ role, content })) },
         })
+        console.info(`[BIA] Answer served by ${data.servedBy}`)
         messages.value.push({ role: 'assistant', content: data.reply })
     } catch (err: any) {
         const status = err?.statusCode ?? err?.status ?? err?.response?.status
