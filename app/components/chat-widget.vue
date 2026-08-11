@@ -130,9 +130,21 @@
                                     </p>
 
                                     <!-- BIA: plain prose, no container -->
-                                    <div v-else class="max-w-[46ch]">
+                                    <div v-else class="max-w-[38rem]">
                                         <span class="mb-2 block font-mono text-[9px] uppercase tracking-micro text-g400">bia</span>
-                                        <p class="whitespace-pre-wrap font-serif text-[1.0625rem] leading-[1.75] text-ink">{{ m.content }}</p>
+                                        <p class="max-w-[46ch] whitespace-pre-wrap font-serif text-[1.0625rem] leading-[1.75] text-ink">{{ m.content }}</p>
+
+                                        <div v-if="m.images?.length" class="mt-5 grid gap-3 sm:grid-cols-2">
+                                            <figure v-for="projectImage in m.images" :key="projectImage.src"
+                                                class="overflow-hidden rounded-sm2 border border-g200 bg-g50 shadow-soft">
+                                                <img :src="projectImage.src" :alt="projectImage.alt"
+                                                    class="aspect-[16/9] w-full object-cover object-top" loading="lazy" />
+                                                <figcaption
+                                                    class="border-t border-g200 px-3 py-2 font-mono text-[9px] uppercase tracking-micro text-g500">
+                                                    {{ projectImage.label }}
+                                                </figcaption>
+                                            </figure>
+                                        </div>
 
                                         <!-- Same white tile as the experience section, so
                                              the school reads as the same institution
@@ -202,7 +214,7 @@
 
 <script setup lang="ts">
 import { computed, nextTick, onUnmounted, ref, watch } from 'vue'
-import { CANNED_EXCHANGES, type Badge, type CannedExchange, type TechIcon } from '~/utils/bia-canned'
+import { CANNED_EXCHANGES, type Badge, type CannedExchange, type CannedImage, type TechIcon } from '~/utils/bia-canned'
 
 interface Message {
     role: 'user' | 'assistant'
@@ -213,6 +225,7 @@ interface Message {
      */
     icons?: TechIcon[]
     badge?: Badge
+    images?: CannedImage[]
 }
 
 /** Keep in sync with MAX_MESSAGE_LENGTH in server/api/chat.post.ts. */
@@ -358,6 +371,7 @@ function askCanned(item: CannedExchange) {
             content: item.a,
             icons: item.icons,
             badge: item.badge,
+            images: item.images,
         })
         pending.value = false
         stopThinking()

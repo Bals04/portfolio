@@ -36,10 +36,10 @@ using only the information below.
 # Experience
 
 ## Front-End Web Developer, AWORK, Denmark (June 2025 – present)
-Assigned as the Frontend Developer for AWORK ONE, one of Awork company's
-products. Responsible for integrating backend functionality with the frontend,
-and for designing and developing intuitive, user-friendly interfaces to ensure
-a seamless user experience.
+Assigned as the frontend developer for Obiyen, a business SaaS platform.
+Responsible for integrating backend functionality with the frontend, and for
+designing and developing intuitive, user-friendly interfaces to ensure a
+seamless user experience.
 Technologies: Laravel, Nuxt.js, MySQL.
 
 ## Front-End Web Developer Intern, AWORK, Denmark (January 2025 – June 2025)

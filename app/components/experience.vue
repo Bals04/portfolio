@@ -63,7 +63,7 @@ const experiences = [
         date: `June 2025 - ${currentMonthYear}`,
         title: 'Front-End Web Developer — AWORK, Denmark',
         logo: '/awork-logo.png',
-        description: 'Assigned as the Frontend Developer for AWORK ONE, one of Awork company’s products. I am responsible for integrating backend functionalities with the frontend, while designing and developing intuitive, user-friendly interfaces to ensure a seamless user experience.',
+        description: 'Assigned as the frontend developer for Obiyen, a business SaaS platform. I am responsible for integrating backend functionality with the frontend, while designing and developing intuitive, user-friendly interfaces to ensure a seamless user experience.',
         technologies: [
             { name: 'Laravel', icon: 'https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg' },
             { name: 'Nuxt.js', icon: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Nuxt_logo.svg' },

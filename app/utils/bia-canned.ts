@@ -30,6 +30,14 @@ export interface Badge {
     label: string
 }
 
+/** A project screenshot shown under a canned answer. */
+export interface CannedImage {
+    /** Path under /public. */
+    src: string
+    alt: string
+    label: string
+}
+
 export interface CannedExchange {
     /** Chip label, and the text pushed into the transcript as the question. */
     q: string
@@ -38,6 +46,8 @@ export interface CannedExchange {
     icons?: TechIcon[]
     /** Optional single framed logo rendered under the answer. */
     badge?: Badge
+    /** Optional project screenshots rendered under the answer. */
+    images?: CannedImage[]
 }
 
 const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons'
@@ -82,7 +92,19 @@ export const CANNED_EXCHANGES: CannedExchange[] = [
         badge: { logo: '/sti-logo.png', label: 'STI College of Davao, 2025' },
     },
     {
-        q: 'Where has he worked?',
-        a: 'He is at AWORK, a Danish company, where he joined as a front-end intern in January 2025 and moved into a full front-end developer role that June. He is the front-end developer on AWORK ONE, and before that he built features for the CitizenOne website using Laravel, Nuxt, and TypeScript. He also finished his BS in Information Technology at STI College of Davao in July 2025.',
+        q: 'Where does he work?',
+        a: 'He works remotely at AWORK, a Danish company, where he joined as a front-end intern in January 2025 and became a full front-end developer that June. He is now the front-end developer for Obiyen, a business SaaS platform, where he integrates backend functionality and builds intuitive, user-friendly interfaces. Before that, he built features for the CitizenOne website using Laravel, Nuxt, and TypeScript.',
+        images: [
+            {
+                src: '/obiyen%20dashboard.png',
+                alt: 'Obiyen business dashboard interface',
+                label: 'Obiyen dashboard',
+            },
+            {
+                src: '/obiyen%20login.png',
+                alt: 'Obiyen login interface',
+                label: 'Obiyen login',
+            },
+        ],
     },
 ]
