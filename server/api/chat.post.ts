@@ -184,7 +184,6 @@ export default defineEventHandler(async (event) => {
           // this number, set it too low and you get an empty reply. Answer
           // length is controlled by the "be concise" rule in the system prompt.
           max_tokens: 1200,
-          temperature: 0.6,
         }),
         // Don't let a slow provider hang the request forever.
         signal: AbortSignal.timeout(30_000),
@@ -204,10 +203,10 @@ export default defineEventHandler(async (event) => {
         JSON.stringify(payload),
       )
 
-      // Out of quota or provider having a bad day → worth trying the backup.
-      // A 400/404 (bad model name, malformed request) would fail identically
-      // everywhere, so don't waste the backup's quota on it.
-      if (status !== 429 && status < 500) break
+      // Provider errors are not interchangeable. For example, Gemini can
+      // reject a parameter or model that Groq accepts, and each provider has
+      // its own key and model permissions. If a backup is configured, let it
+      // try every failure from the main provider.
     } catch (error) {
       console.error(`[api/chat] ${provider.label} provider unreachable:`, error)
       status = 0
@@ -231,10 +230,14 @@ export default defineEventHandler(async (event) => {
           : MESSAGES.providerBusy,
       })
     }
-    if (status === 401 || status === 403) {
+    if (
+      status === 400 ||
+      status === 401 ||
+      status === 403 ||
+      status === 404
+    ) {
       throw createError({ statusCode: 503, message: MESSAGES.misconfigured })
     }
-    // A retired or misspelled model name lands here (404 from the provider).
     throw createError({ statusCode: 502, message: MESSAGES.generic })
   }
 
