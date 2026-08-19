@@ -118,7 +118,8 @@ const projects = [
     { id: 6, title: 'XNY Events & Food Services', description: 'A vibrant landing page for a Davao events and catering business, designed to turn special days into unforgettable ones.', image: '/xny.jpg' },
     { id: 7, title: 'Lead Generation Specialist Portfolio', description: 'A sharp, conversion-focused portfolio for a lead-gen pro, showcasing the funnels, results, and strategy that drive real business growth.', image: '/leadgeneration.png' },
     { id: 8, title: 'E-Voting System', description: 'A secure digital voting platform that swaps paper ballots for clean, transparent, and tamper-resistant elections, built for trust at scale.', image: '/evotingimg.png' },
-    { id: 9, title: 'Flexperience', description: 'My capstone project. A unified fitness platform connecting gym owners, trainers, and members, built to make managing workouts and clients feel effortless.', award: 'Best Capstone of the Year', image: '/flexperience.png' }
+    { id: 9, title: 'Obiyen', description: 'Obiyen brings together essential business tools in one platform. Manage cookies, monitor SEO rankings, analyze websites and track performance across your digital channels - all from your mobile device.', image: '/obiyen.webp' },
+    { id: 10, title: 'Flexperience', description: 'My capstone project. A unified fitness platform connecting gym owners, trainers, and members, built to make managing workouts and clients feel effortless.', award: 'Best Capstone of the Year', image: '/flexperience.png' }
 ];
 
 // Linear carousel: viewed cards stack to the LEFT, upcoming to the RIGHT.
