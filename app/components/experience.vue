@@ -60,7 +60,7 @@ const currentMonthYear = new Date().toLocaleString('en-US', { month: 'long', yea
 const experiences = [
     {
         id: 1,
-        date: `June 2025 - ${currentMonthYear}`,
+        date: `June 2025 - June 2026`,
         title: 'Front-End Web Developer — AWORK, Denmark',
         logo: '/awork-logo.png',
         description: 'Assigned as the frontend developer for Obiyen, a business SaaS platform. I am responsible for integrating backend functionality with the frontend, while designing and developing intuitive, user-friendly interfaces to ensure a seamless user experience.',

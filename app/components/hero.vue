@@ -12,7 +12,7 @@
 
                     <p class="reveal mt-5 font-montserrat text-lg md:text-xl font-normal tracking-wide text-ink"
                         :class="{ in: shown }" style="animation-delay: 120ms">
-                        Full-Stack Web Developer
+                        Full-Stack Web/Mobile Developer
                     </p>
 
                     <p class="reveal mt-8 max-w-md font-montserrat text-base leading-[1.7] text-g500"
@@ -27,12 +27,12 @@
                         <div class="flex items-center gap-3">
                             <a href="https://facebook.com/jj.balsamo"
                                 class="inline-flex items-center rounded-input bg-ink px-4 py-2.5 font-mono text-xs text-bg transition-opacity hover:opacity-80">
-                                schedule a call
+                                Schedule a call
                             </a>
 
                             <button type="button" @click="resumeOpen = true"
                                 class="inline-flex items-center rounded-input bg-ink px-4 py-2.5 font-mono text-xs text-bg transition-opacity hover:opacity-80">
-                                view resume
+                                View resume
                             </button>
                         </div>
 
