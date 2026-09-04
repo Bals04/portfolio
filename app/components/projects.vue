@@ -110,16 +110,16 @@ const views = [
 ];
 
 const projects = [
-    { id: 1, title: 'Chade Inanag', description: 'A warm, appetite-stirring landing page for a beloved restaurant in Valencia, Bukidnon, built to make every visitor crave a seat at the table.', image: '/chadeinanag.jpg' },
-    { id: 2, title: 'GAB Matcha Bar', description: 'A calm, earthy landing page for a matcha bar in Valencia, Bukidnon, designed to feel as smooth and grounded as the drinks they serve.', image: '/gabmatcha.jpg' },
-    { id: 3, title: 'DC Cakes', description: 'A sweet, playful landing page for a cake shop in Bukidnon. Colorful, cheerful, and ready to turn browsers into buyers.', image: '/dccakes.jpg' },
-    { id: 4, title: 'Home Meals by Raf & Nika', description: 'A homey landing page for a Panabo City catering business, capturing the comfort of home-cooked meals served with love.', image: '/homemeals.jpg' },
-    { id: 5, title: 'Uni Lux', description: 'A bold, elegant landing page for a Metro Manila luxury bag brand. Minimal, refined, and built to elevate the product.', image: '/unilux.jpg' },
-    { id: 6, title: 'XNY Events & Food Services', description: 'A vibrant landing page for a Davao events and catering business, designed to turn special days into unforgettable ones.', image: '/xny.jpg' },
-    { id: 7, title: 'Lead Generation Specialist Portfolio', description: 'A sharp, conversion-focused portfolio for a lead-gen pro, showcasing the funnels, results, and strategy that drive real business growth.', image: '/leadgeneration.png' },
-    { id: 8, title: 'E-Voting System', description: 'A secure digital voting platform that swaps paper ballots for clean, transparent, and tamper-resistant elections, built for trust at scale.', image: '/evotingimg.png' },
-    { id: 9, title: 'Obiyen', description: 'Obiyen brings together essential business tools in one platform. Manage cookies, monitor SEO rankings, analyze websites and track performance across your digital channels - all from your mobile device.', image: '/obiyen.webp' },
-    { id: 10, title: 'Flexperience', description: 'My capstone project. A unified fitness platform connecting gym owners, trainers, and members, built to make managing workouts and clients feel effortless.', award: 'Best Capstone of the Year', image: '/flexperience.png' }
+    { id: 1, title: 'Goodstart International', description: 'A landing page website study-abroad consultancy business based in Davao City.', image: '/goodstart.png' },
+    { id: 2, title: 'Laagan Gear Rental', description: 'A landing page for an outdoor and hiking gear rental business based in Davao City.', image: '/laagan-gear-rental.jpg' },
+    { id: 3, title: 'Home Meals by Raf & Nika', description: 'A homey landing page for a Panabo City catering business.', image: '/homemeals.png' },
+    { id: 4, title: 'Flexperience', description: 'My capstone project. A unified fitness platform connecting gym owners, trainers, and members, built to make managing workouts and clients feel effortless.', award: 'Best Capstone of the Year', image: '/flexperience.png' },
+    { id: 5, title: 'Chade Inanag', description: 'A warm, appetite-stirring landing page for a beloved restaurant in Valencia, Bukidnon, built to make every visitor crave a seat at the table.', image: '/chadeinanag.jpg' },
+    { id: 6, title: 'GAB Matcha Bar', description: 'A calm, earthy landing page for a matcha bar in Valencia, Bukidnon, designed to feel as smooth and grounded as the drinks they serve.', image: '/gabmatcha.jpg' },
+    { id: 7, title: 'DC Cakes', description: 'A sweet, playful landing page for a cake shop in Bukidnon. Colorful, cheerful, and ready to turn browsers into buyers.', image: '/dccakes.jpg' },
+    { id: 8, title: 'Uni Lux', description: 'A bold, elegant landing page for a Metro Manila luxury bag brand. Minimal, refined, and built to elevate the product.', image: '/unilux.jpg' },
+    { id: 9, title: 'XNY Events & Food Services', description: 'A vibrant landing page for a Davao events and catering business, designed to turn special days into unforgettable ones.', image: '/xny.jpg' },
+    { id: 10, title: 'Obiyen', description: 'Obiyen brings together essential business tools in one platform. Manage cookies, monitor SEO rankings, analyze websites and track performance across your digital channels - all from your mobile device.', image: '/obiyen.webp' },
 ];
 
 // Linear carousel: viewed cards stack to the LEFT, upcoming to the RIGHT.

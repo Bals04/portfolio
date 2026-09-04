@@ -4,7 +4,7 @@
          and a second solid pill of equal weight would split that attention.
          The offsets track the chat launcher's own bottom-24 / sm:bottom-6 plus
          its height, so the two read as one stack. -->
-    <div v-if="!open" class="fixed bottom-[9.5rem] right-4 z-[55] sm:bottom-[5rem] sm:right-6">
+    <div v-if="!open" class="hidden fixed bottom-[9.5rem] right-4 z-[55] md:block sm:bottom-[5rem] sm:right-6">
         <button type="button" @click="openTest" aria-label="Open typing test"
             class="flex items-center gap-2 rounded-full border border-g200 bg-bg py-2.5 pl-3 pr-4 text-ink shadow-soft transition-all duration-[350ms] ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:border-ink">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
@@ -20,7 +20,7 @@
 
     <Teleport to="body">
         <Transition name="veil">
-            <div v-if="open" class="fixed inset-0 z-[70]" role="dialog" aria-modal="true" aria-label="Typing test">
+            <div v-if="open" class="hidden fixed inset-0 z-[70] md:block" role="dialog" aria-modal="true" aria-label="Typing test">
 
                 <!-- Same frosted paper as the chat overlay, so the two feel like
                      rooms in one building rather than two visual languages. -->

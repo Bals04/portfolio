@@ -55,7 +55,7 @@ const categories = [
             { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
             { name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
             { name: "Expo", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/expo/expo-original.svg", invertDark: true },
-            { name: "React Navigation", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/reactnavigation/reactnavigation-original.svg" },
+            { name: "Flutter", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" },
             { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", invertDark: true },
             { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
             { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
@@ -89,13 +89,14 @@ const categories = [
         items: [
             { name: "Claude Code", icon: "https://unpkg.com/@lobehub/icons-static-svg@latest/icons/claude-color.svg" },
             { name: "Codex", icon: "https://unpkg.com/@lobehub/icons-static-svg@latest/icons/openai.svg", invertDark: true },
+            { name: "Hugging Face", icon: "https://unpkg.com/@lobehub/icons-static-svg@latest/icons/huggingface-color.svg" },
         ]
     }
 ]
 
 // Pick a column count that divides the item count evenly so every row is
-// full — no empty cells. Groups of 6 stay 3-wide; the 2-item AI group is
-// 2-wide. Falls back to 3 for anything not cleanly divisible.
+// full — no empty cells. Groups of 6 stay 3-wide; the 3-item AI group is
+// 3-wide too. Falls back to 3 for anything not cleanly divisible.
 const colsFor = (count) => (count % 3 === 0 ? 3 : count % 2 === 0 ? 2 : 3)
 
 const handleScroll = () => {

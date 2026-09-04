@@ -12,23 +12,24 @@
 
                     <p class="reveal mt-5 font-montserrat text-lg md:text-xl font-normal tracking-wide text-ink"
                         :class="{ in: shown }" style="animation-delay: 120ms">
-                        Full-Stack Web/Mobile Developer
+                        Full-Stack Web/Mobile &amp; AI Developer
                     </p>
 
                     <p class="reveal mt-8 max-w-md font-montserrat text-base leading-[1.7] text-g500"
                         :class="{ in: shown }" style="animation-delay: 190ms">
                         A full-stack developer building production SaaS platforms, from responsive
-                        front-end interfaces to the APIs and databases behind them.
+                        front-end interfaces to the APIs and databases behind them, plus the
+                        LLM/AI features layered on top, from chat assistants to AI-driven workflows.
                     </p>
 
                     <div class="reveal mt-10 flex flex-wrap items-center gap-6" :class="{ in: shown }"
                         style="animation-delay: 260ms">
                         <!-- inverted chips — the loud pair -->
                         <div class="flex items-center gap-3">
-                            <a href="https://facebook.com/jj.balsamo"
+                            <button type="button" @click="contactOpen = true"
                                 class="inline-flex items-center rounded-input bg-ink px-4 py-2.5 font-mono text-xs text-bg transition-opacity hover:opacity-80">
                                 Schedule a call
-                            </a>
+                            </button>
 
                             <button type="button" @click="resumeOpen = true"
                                 class="inline-flex items-center rounded-input bg-ink px-4 py-2.5 font-mono text-xs text-bg transition-opacity hover:opacity-80">
@@ -61,6 +62,7 @@
         </div>
 
         <ResumeModal :open="resumeOpen" @close="resumeOpen = false" />
+        <ContactModal :open="contactOpen" @close="contactOpen = false" />
     </section>
 </template>
 
@@ -69,6 +71,7 @@ import { onMounted, ref } from 'vue'
 
 const shown = ref(false)
 const resumeOpen = ref(false)
+const contactOpen = ref(false)
 
 const socials = [
     {

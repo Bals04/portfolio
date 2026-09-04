@@ -24,6 +24,11 @@
                             {{ exp.date }}
                         </span>
 
+                        <span v-if="exp.tag"
+                            class="ml-2 inline-block rounded-full border border-g300 px-3 py-1 font-mono text-[9px] uppercase tracking-micro text-g500">
+                            {{ exp.tag }}
+                        </span>
+
                         <div class="mt-4 flex items-center gap-3">
                             <div class="flex h-9 w-9 items-center justify-center overflow-hidden rounded-sm2 border border-g200 bg-white">
                                 <img :src="exp.logo" alt="" class="h-full w-full object-contain p-1" />
@@ -60,7 +65,8 @@ const currentMonthYear = new Date().toLocaleString('en-US', { month: 'long', yea
 const experiences = [
     {
         id: 1,
-        date: `June 2025 - June 2026`,
+        tag: '',
+        date: `June 2025 - August 2026`,
         title: 'Front-End Web Developer — AWORK, Denmark',
         logo: '/awork-logo.png',
         description: 'Assigned as the frontend developer for Obiyen, a business SaaS platform. I am responsible for integrating backend functionality with the frontend, while designing and developing intuitive, user-friendly interfaces to ensure a seamless user experience.',
@@ -71,7 +77,21 @@ const experiences = [
         ]
     },
     {
+        id: 4,
+        date: 'December 2025',
+        tag: 'Part-time',
+        title: 'UI/UX Developer — Caremed Healthcare Group, United Kingdom',
+        logo: 'https://cdn.simpleicons.org/shopify/95BF47',
+        description: 'Part-time role improving the overall UI/UX of an established Shopify website. Refined layouts, visual consistency, and user flows, and fixed UI issues across the storefront to deliver a cleaner, more usable shopping experience.',
+        technologies: [
+            { name: 'Shopify', icon: 'https://cdn.simpleicons.org/shopify/95BF47' },
+            { name: 'Liquid', icon: 'https://cdn.simpleicons.org/shopify/95BF47' },
+            { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' }
+        ]
+    },
+    {
         id: 2,
+        tag: '',
         date: 'January 2025 - June 2025',
         title: 'Front-End Web Developer Intern — AWORK, Denmark',
         logo: '/awork-logo.png',
@@ -84,6 +104,7 @@ const experiences = [
     },
     {
         id: 3,
+        tag: '',
         date: 'July 2025',
         title: 'BS Information Technology — STI College of Davao',
         logo: '/sti-logo.png',

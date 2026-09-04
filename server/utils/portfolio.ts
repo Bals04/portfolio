@@ -22,9 +22,11 @@ using only the information below.
 # Jonhyl Balsamo, profile
 
 - Full name: Jonhyl Balsamo (goes by JJ)
-- Role: Full-Stack Web Developer
+- Role: Full-Stack Web/Mobile & AI Developer
 - Summary: A full-stack developer building production SaaS platforms, from
-  responsive front-end interfaces to the APIs and databases behind them.
+  responsive front-end interfaces to the APIs and databases behind them, plus
+  the LLM/AI features layered on top, from chat assistants to AI-driven
+  workflows.
 - Based in the Philippines (Davao region); works for a Danish company remotely.
 - Contact / links:
   - GitHub: https://github.com/bals04
@@ -41,6 +43,13 @@ Responsible for integrating backend functionality with the frontend, and for
 designing and developing intuitive, user-friendly interfaces to ensure a
 seamless user experience.
 Technologies: Laravel, Nuxt.js, MySQL.
+
+## UI/UX Developer (Part-time), Caremed Healthcare Group, United Kingdom (December 2025, remote)
+A part-time, remote side role improving the overall UI/UX of Caremed's
+established Shopify website. Refined layouts, visual consistency, and user
+flows, and fixed UI issues across the storefront for a cleaner, more usable
+shopping experience.
+Technologies: Shopify, Liquid, CSS.
 
 ## Front-End Web Developer Intern, AWORK, Denmark (January 2025 – June 2025)
 Assisted in building and enhancing the CitizenOne website using Nuxt.js,
@@ -73,12 +82,13 @@ capstone project excellence.
 6. **XNY Events & Food Services**: A vibrant landing page for a Davao events
    and catering business, designed to turn special days into unforgettable
    ones.
-7. **Lead Generation Specialist Portfolio**: A sharp, conversion-focused
-   portfolio for a lead-gen pro, showcasing the funnels, results, and strategy
-   that drive real business growth.
-8. **E-Voting System**: A secure digital voting platform that swaps paper
-   ballots for clean, transparent, and tamper-resistant elections, built for
-   trust at scale.
+7. **Laagan Gear Rental**: A landing page for an outdoor and hiking gear
+   rental business based in Davao.
+8. **Goodstart International**: A calm, reassuring site for Goodstart
+   International, a Davao City career consultancy and student-visa firm. It
+   walks aspiring students from a free consultation through course matching,
+   documents, and visa applications, to studying in Australia, New Zealand,
+   Europe, the USA, or Canada.
 9. **Flexperience**: Jonhyl's capstone project, and winner of **Best Capstone
    of the Year**. A unified fitness platform connecting gym owners, trainers,
    and members, built to make managing workouts and clients feel effortless.
@@ -102,7 +112,7 @@ who keeps Jonhyl lifting, and **VEEH**, a buzzing bee watching over his wallet.
 - **Backend:** Node.js, Express, Prisma, MySQL, Socket.IO, Supabase.
   (Also works with Laravel/PHP at AWORK.)
 - **Tools & others:** Git, VS Code, Postman, Thunder Client, Figma, Shopify.
-- **AI tools he uses day to day:** Claude Code, Codex.
+- **AI tools he uses day to day:** Claude Code, Codex, Hugging Face.
 
 # How to answer
 
