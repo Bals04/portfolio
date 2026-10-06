@@ -1,71 +1,94 @@
 <template>
-    <section id="personal" ref="sectionRef" class="relative overflow-hidden px-4 md:px-6 py-14 md:py-20 border-t border-g200">
+    <!-- Styled after the Gym Progress Tracker itself, so this section stays dark in both themes. -->
+    <section id="personal" ref="sectionRef"
+        class="gym relative overflow-hidden px-4 md:px-6 py-14 md:py-20 font-montserrat">
         <div class="mx-auto max-w-4xl">
 
             <!-- header -->
             <div class="reveal grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-8 mb-12"
                 :class="{ in: visible }">
                 <div>
-                    <p class="font-mono text-[10px] uppercase tracking-micro text-g400 mb-3">03 — personal</p>
-                    <h2 class="font-pixel text-4xl md:text-5xl text-ink">Side Quests</h2>
-                    <p class="mt-6 max-w-lg font-serif text-[1.0625rem] leading-[1.75] text-g500">
-                        Meet <span class="font-mono text-xs uppercase tracking-micro text-ink">BAW</span>, the
-                        no-nonsense bull who keeps me lifting, and
-                        <span class="font-mono text-xs uppercase tracking-micro text-ink">VEEH</span>, the buzzing bee
-                        watching over my wallet — the two mascots leading my little universe of passion projects.
+                    <p class="mb-3 flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--gym-green)]">
+                        <span class="h-[7px] w-6 bg-[var(--gym-green)]"></span>03 — Personal app
+                    </p>
+                    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-[var(--gym-text)]">
+                        Gym Progress Tracker
+                    </h2>
+                    <p class="mt-5 max-w-lg text-[15px] leading-[1.75] text-[var(--gym-muted)]">
+                        A training log I built for myself and use every week. Plan the week in a calendar-style
+                        board, then add, edit and delete exercises inside each day, on desktop or on my phone.
                     </p>
                 </div>
-                <div class="flex justify-center md:justify-end">
-                    <img src="/personal-projects/mascot-collab.png" alt="DevBiz mascot collaboration"
-                        class="w-full max-w-[16rem]" style="image-rendering: pixelated;" />
-                </div>
-            </div>
 
-            <!-- deck counter -->
-            <div class="reveal mb-4 flex items-center justify-between" :class="{ in: visible }"
-                style="animation-delay: 80ms">
-                <span class="font-mono text-[10px] uppercase tracking-micro text-g400">click a card</span>
-                <span class="font-mono text-[10px] uppercase tracking-micro text-g400">
-                    {{ String(active + 1).padStart(2, '0') }} / {{ String(projects.length).padStart(2, '0') }}
-                </span>
-            </div>
-
-            <!-- fanned deck -->
-            <div class="reveal relative mx-auto h-[420px] select-none overflow-hidden sm:h-[460px]"
-                :class="{ in: visible }" style="animation-delay: 120ms">
-                <div v-for="(project, index) in projects" :key="project.id"
-                    class="absolute left-1/2 top-1/2 w-[270px] sm:w-[320px] md:w-[360px] -translate-x-1/2 -translate-y-1/2 cursor-pointer overflow-hidden rounded-card border border-g200 bg-bg shadow-soft transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
-                    :style="cardStyle(index)" @click="onCardClick(index)"
-                    :aria-hidden="index !== active" :tabindex="index === active ? 0 : -1">
-
-                    <div class="relative overflow-hidden border-b border-g200 bg-g50" style="aspect-ratio: 16/9;">
-                        <img :src="project.image" :alt="project.title" class="h-full w-full object-cover" />
-                    </div>
-
-                    <div class="p-5">
+                <!-- coach baw + speech bubble, same as in the app -->
+                <div class="flex items-center gap-4 md:justify-end">
+                    <img src="/personal-projects/coach-baw.png" alt="Coach BAW, the bull mascot"
+                        class="w-28 shrink-0 md:w-32" style="image-rendering: pixelated;" />
+                    <div
+                        class="relative max-w-[15rem] rounded-xl border border-[var(--gym-line)] bg-[var(--gym-card)] p-4">
                         <span
-                            class="inline-flex items-center gap-1 rounded-full bg-ink px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-micro text-bg">
-                            <span>‹</span>{{ project.category }}<span>›</span>
-                        </span>
-                        <h3 class="mt-3 text-lg font-semibold tracking-tight text-ink">{{ project.title }}</h3>
-                        <p class="mt-2 text-[13px] leading-relaxed text-g500">{{ project.description }}</p>
+                            class="absolute -left-[7px] top-6 h-3 w-3 rotate-45 border-b border-l border-[var(--gym-line)] bg-[var(--gym-card)]"></span>
+                        <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-[var(--gym-green)]">Coach Baw</p>
+                        <p class="mt-1.5 text-[13px] font-semibold leading-snug text-[var(--gym-text)]">
+                            No skipping leg day. I'm the bull who keeps this guy lifting.
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <!-- controls -->
-            <div class="reveal mt-2 flex items-center justify-center gap-6" :class="{ in: visible }"
-                style="animation-delay: 200ms">
-                <button type="button" aria-label="Previous" @click="prev"
-                    class="flex h-9 w-9 items-center justify-center rounded-full border border-g200 text-g500 transition-colors hover:border-g300 hover:text-ink">←</button>
-                <div class="flex items-center gap-2">
-                    <button v-for="(p, i) in projects" :key="p.id" type="button" :aria-label="`Go to ${p.title}`"
-                        @click="activate(i)" class="h-1.5 rounded-full transition-all duration-300"
-                        :class="i === active ? 'w-5 bg-ink' : 'w-1.5 bg-g300 hover:bg-g400'"></button>
+            <div class="mb-10 h-px bg-[var(--gym-line)]"></div>
+
+            <!-- devices -->
+            <div class="reveal relative pb-2 md:pr-10" :class="{ in: visible }" style="animation-delay: 120ms">
+
+                <!-- monitor -->
+                <div class="w-[88%] md:w-[86%]">
+                    <div class="rounded-[14px] bg-[#0b0b0d] p-[6px] sm:p-[10px] ring-1 ring-[#3a3a3a]"
+                        style="box-shadow: 0 30px 60px -25px rgb(0 0 0 / 0.8);">
+                        <div class="overflow-hidden rounded-[6px] bg-[var(--gym-bg)]" style="aspect-ratio: 1659/895;">
+                            <img src="/personal-projects/desktop-view.png"
+                                alt="Gym Progress Tracker on desktop: weekly stats and Tuesday's pull session"
+                                class="h-full w-full object-cover object-top" loading="lazy" />
+                        </div>
+                        <div class="flex justify-center pt-[5px] sm:pt-[8px]">
+                            <span class="h-1 w-1 rounded-full bg-[#2a2a2e]"></span>
+                        </div>
+                    </div>
+                    <!-- stand -->
+                    <div class="mx-auto h-6 w-[14%] bg-gradient-to-b from-[#141416] to-[#2a2a2f] sm:h-10"
+                        style="clip-path: polygon(18% 0, 82% 0, 100% 100%, 0 100%);"></div>
+                    <div class="mx-auto h-[6px] w-[30%] rounded-t-[3px] rounded-b-[8px] bg-[#2f2f34]"></div>
                 </div>
-                <button type="button" aria-label="Next" @click="next"
-                    class="flex h-9 w-9 items-center justify-center rounded-full border border-g200 text-g500 transition-colors hover:border-g300 hover:text-ink">→</button>
+
+                <!-- phone -->
+                <div class="absolute bottom-0 right-0 w-[30%] sm:w-[24%] md:w-[21%]">
+                    <div class="rounded-[22px] sm:rounded-[32px] bg-[#0b0b0d] p-[4px] sm:p-[7px] ring-1 ring-[#444]"
+                        style="box-shadow: 0 40px 70px -20px rgb(0 0 0 / 0.9);">
+                        <div class="relative overflow-hidden rounded-[18px] sm:rounded-[26px] bg-[var(--gym-bg)]"
+                            style="aspect-ratio: 924/1999;">
+                            <img src="/personal-projects/mobile-view.jpg"
+                                alt="Gym Progress Tracker on mobile with Coach BAW and weekly stats"
+                                class="h-full w-full object-cover object-top" loading="lazy" />
+                            <span
+                                class="absolute left-1/2 top-[1.4%] h-[2.6%] w-[30%] -translate-x-1/2 rounded-full bg-black"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- features strip -->
+            <ul class="reveal mt-14 grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6"
+                :class="{ in: visible }" style="animation-delay: 200ms">
+                <li v-for="(f, i) in features" :key="f.title" class="relative pl-5">
+                    <!-- floating accent bar, echoing the app's green marker -->
+                    <span class="absolute left-0 top-0.5 bottom-0.5 w-[3px] rounded-full bg-[var(--gym-green)]"></span>
+                    <p class="text-[11px] font-bold tracking-[0.14em] text-[var(--gym-green)]">
+                        {{ String(i + 1).padStart(2, '0') }}
+                    </p>
+                    <p class="mt-3 text-[15px] font-extrabold text-[var(--gym-text)]">{{ f.title }}</p>
+                    <p class="mt-1.5 text-[13px] leading-relaxed text-[var(--gym-muted)]">{{ f.text }}</p>
+                </li>
+            </ul>
         </div>
     </section>
 </template>
@@ -75,57 +98,12 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 const sectionRef = ref(null);
 const visible = ref(false);
-const active = ref(0);
-// the card most recently sent forward — kept on top for the whole glide
-const lifting = ref(0);
 
-const projects = [
-    {
-        id: 1,
-        title: 'Gym Progress Tracker',
-        category: 'Fitness · Personal App',
-        description: 'A calendar-style training log to plan, edit and review weekly sessions. Tracks volume, active days and exercise breakdowns at a glance.',
-        image: '/personal-projects/Screenshot%202026-05-16%20151733.png'
-    },
-    {
-        id: 2,
-        title: 'BuzzBudget',
-        category: 'Finance · Personal App',
-        description: 'A friendly personal finance tracker with a built-in mascot guide. Manage budgets, log spending and move money to savings, all in one calm dashboard.',
-        image: '/personal-projects/Screenshot%202026-05-16%20151836.png'
-    }
+const features = [
+    { title: 'Weekly board', text: 'Plan every day of the week in a calendar-style board.' },
+    { title: 'Active days', text: 'See how consistent I am, with rest days kept on the board.' },
+    { title: 'Total volume', text: 'Sets × reps × kg, added up per day and for the whole week.' },
 ];
-
-// Fan each card out relative to the active one.
-const cardStyle = (index) => {
-    const n = projects.length;
-    let pos = index - active.value;
-    if (pos > n / 2) pos -= n;
-    if (pos < -n / 2) pos += n;
-    const abs = Math.abs(pos);
-
-    // the just-clicked card rides on top for the entire transition, so you
-    // watch it travel over the deck instead of snapping in front.
-    const onTop = index === lifting.value ? 60 : 0;
-
-    if (pos === 0) {
-        return `transform: translate(-50%,-50%) scale(1.04); opacity:1; z-index:${Math.max(50, onTop)};`;
-    }
-    if (abs > 3) {
-        return 'transform: translate(-50%,-50%) scale(0.8); opacity:0; z-index:0; pointer-events:none;';
-    }
-    const x = pos * 52;
-    const y = abs * 18;
-    const rot = pos * 6;
-    const scale = 1 - abs * 0.07;
-    const opacity = abs <= 2 ? 0.6 : 0.3;
-    return `transform: translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) rotate(${rot}deg) scale(${scale}); opacity:${opacity}; z-index:${onTop || (40 - abs)};`;
-};
-
-const activate = (i) => { lifting.value = i; active.value = i; };
-const onCardClick = (i) => { i === active.value ? next() : activate(i); };
-const next = () => { const i = (active.value + 1) % projects.length; activate(i); };
-const prev = () => { const i = (active.value - 1 + projects.length) % projects.length; activate(i); };
 
 const handleScroll = () => {
     if (!sectionRef.value) return;
@@ -138,3 +116,22 @@ onMounted(() => {
 });
 onUnmounted(() => window.removeEventListener('scroll', handleScroll));
 </script>
+
+<style scoped>
+/* Gym Progress Tracker palette, fixed regardless of the site theme */
+.gym {
+    --gym-bg: #1b1b1b;
+    --gym-card: #252525;
+    --gym-line: #333333;
+    --gym-text: #f4f4f4;
+    --gym-muted: #a8a8a8;
+    --gym-green: #3fa982;
+    /* faint green glow behind the mascot, over a subtle dot grid */
+    background:
+        radial-gradient(ellipse 60% 45% at 85% 10%, rgb(63 169 130 / 0.08), transparent 70%),
+        radial-gradient(rgb(255 255 255 / 0.06) 1px, transparent 1.2px) 0 0 / 18px 18px,
+        var(--gym-bg);
+    color: var(--gym-text);
+    color-scheme: dark;
+}
+</style>

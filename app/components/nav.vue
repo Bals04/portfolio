@@ -53,7 +53,7 @@ const layers = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
 
 const links = [
     { id: 'work', label: 'Projects', icon: folder },
-    { id: 'personal', label: 'Quests', icon: spark },
+    { id: 'personal', label: 'App', icon: spark },
     { id: 'experience', label: 'Career', icon: briefcase },
     { id: 'stack', label: 'Tools', icon: layers },
 ]

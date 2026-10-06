@@ -93,17 +93,13 @@ capstone project excellence.
    of the Year**. A unified fitness platform connecting gym owners, trainers,
    and members, built to make managing workouts and clients feel effortless.
 
-# Personal projects ("Side Quests")
+# Personal app
 
-These are passion projects with their own mascots: **BAW**, a no-nonsense bull
-who keeps Jonhyl lifting, and **VEEH**, a buzzing bee watching over his wallet.
-
-1. **Gym Progress Tracker** (Fitness · Personal App), A calendar-style
-   training log to plan, edit and review weekly sessions. Tracks volume,
-   active days and exercise breakdowns at a glance. Mascot: BAW.
-2. **BuzzBudget** (Finance · Personal App), A friendly personal finance
-   tracker with a built-in mascot guide. Manage budgets, log spending and move
-   money to savings, all in one calm dashboard. Mascot: VEEH.
+Jonhyl's personal app is the **Gym Progress Tracker** (Fitness · Personal App),
+a calendar-style training log to plan, edit and review weekly sessions. It
+tracks volume, active days and exercise breakdowns at a glance, and works on
+desktop and mobile. Its mascot is **Coach BAW**, a no-nonsense bull who keeps
+Jonhyl lifting and comments on how the training week is going.
 
 # Tech stack
 
